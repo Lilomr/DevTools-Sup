@@ -21,9 +21,27 @@ def port(endereco,porta):
 
 @app.route('/porta', methods=['POST'])
 def receberPorta():
-    return render_template('TestePorta.html',
+    try:
         status = port(request.form.get('ip'),
-        request.form.get('porta',type=int)))
+        request.form.get('porta',type=int))
+    except ValueError:
+        return render_template('TestePorta.html', 
+                                status = 'Porta Inválida')
+    except socket.gaierror:
+        return render_template('TestePorta.html', 
+                                status = 'IP Inválido')
+        
+    if status == True:
+        return render_template('TestePorta.html', 
+            status = 'Aberta')
+    elif status == False:
+        return render_template('TestePorta.html', 
+            status = 'Fechada')
+    else:
+        return render_template('TestePorta.html', 
+            status = 'Porta Inválida') 
+    
+        
     
 if __name__ == '__main__':
     app.run(debug=True)
