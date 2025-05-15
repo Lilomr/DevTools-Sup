@@ -30,6 +30,10 @@ def receberPorta():
     except socket.gaierror:
         return render_template('TestePorta.html', 
                                 status = 'IP Inválido')
+    except TypeError:
+        return render_template('TestePorta.html', 
+                                status = 'Porta Inválida')
+        
         
     if status == True:
         return render_template('TestePorta.html', 
