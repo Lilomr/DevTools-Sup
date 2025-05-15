@@ -1,1 +1,1 @@
-web: gunicorn TestePorta:app
+web: gunicorn app:app
