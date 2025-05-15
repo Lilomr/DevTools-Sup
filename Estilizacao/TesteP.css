@@ -20,12 +20,12 @@ body{
     width: 22%;
 }
 
-#botaoEnviar{
-    background-color: #07fc86;
-    color: white;
+.botaoEnviar > b > button{
+    background-color: #1eff00;
+    color: black;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 5px 20px;
+    font-size: 20px;
     cursor: pointer;
     border-radius: 5px;
 }

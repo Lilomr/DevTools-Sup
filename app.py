@@ -29,27 +29,45 @@ def port(endereco,porta):
 @app.route('/porta', methods=['POST'])
 def receberPorta():
     try:
+        meuIp = (request.headers.get('X-Forwarded-For') or  
+            request.headers.get('X-Real-IP') or 
+            request.headers.get('Remote-Addr'))
         porta = request.form.get('porta',type=int)
         ip = request.form.get('ip')
-        print(type(porta))
-        print(type(ip))
         status = port(ip,porta)
+        ip = socket.gethostbyname(ip) 
+
     except socket.gaierror:
-        return render_template('TestePorta.html', 
-                                status = 'IP Inválido')
+        return render_template('TestePorta.html',
+                                ip = ip,
+                                porta = porta,
+                                meuIp = meuIp,
+                                status = f'Servidor {ip} Inválido',)
     except TypeError as e:
-        return render_template('TestePorta.html', 
-                                status = 'Porta Inválida')
+        return render_template('TestePorta.html', ip = ip,
+                                porta = porta,
+                                meuIp = meuIp,
+                                status = f'Porta {porta} Inválida')
+    except OverflowError:
+        return render_template('TestePorta.html',ip = ip,
+                                porta = porta,
+                                meuIp = meuIp,
+                                status = f'Porta {porta} Inválida')
         
         
-    if status == True:
+    if status == True:        
         return render_template('TestePorta.html',ip = ip,
             porta = porta,
-            status = 'Aberta')
+            status = 'Aberta',
+            meuIp = meuIp,
+            color = 'green')
+        
     else:
         return render_template('TestePorta.html', ip = ip,
             porta = porta,
-            status = 'Fechada')
+            status = 'Fechada',
+            meuIp = meuIp,
+            color = 'red')
     
 if __name__ == '__main__':
     app.run(debug=True)

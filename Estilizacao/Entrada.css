@@ -1,0 +1,42 @@
+body{
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+
+}
+
+h1{
+    background-color: #fc7507;
+    border: 2px solid #fc8607;
+    color: white;
+    font-size: 45px;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    
+}
+
+.Entrada{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100%;
+    
+}
+.Entrada > button{
+    background-color: #e3fc07;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
