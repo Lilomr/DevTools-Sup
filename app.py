@@ -7,7 +7,11 @@ app = Flask(__name__, template_folder='Templates')
 @app.route('/')
 def index():
     print(request.headers)
-    return render_template('TestePorta.html', meuIp = request.headers.get('Remote-Addr'))
+    return render_template('TestePorta.html', 
+        meuIp = request.headers.get('X-Forwarded-For') or 
+        request.headers.get('X-Real-IP') or 
+        request.headers.get('Remote-Addr') 
+    )
     
 
 
