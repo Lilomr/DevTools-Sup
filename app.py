@@ -14,14 +14,15 @@ def index():
     
 def port(endereco,porta):    
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    result = sock.connect_ex((endereco,porta))
+    sock.settimeout(3)
+    result = sock.connect_ex((endereco, porta))
     sock.close()
     return result == 0
 
 @app.route('/porta', methods=['POST'])
 def receberPorta():
-    return port(request.form.get('ip'),
-                request.form.get('porta',type=int))
+    return {'status': port(request.form.get('ip'),
+                request.form.get('porta',type=int))}
     
 if __name__ == '__main__':
     app.run(debug=True)
