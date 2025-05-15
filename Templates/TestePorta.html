@@ -20,11 +20,11 @@
         <div class="status">
 
             {% if portaAberta is not none %}
-            <h3 id ="PortOpen">Porta {{porta}} está {{portaAberta}}</h3>
+            <h3 id ="PortOpen">{{porta}}Aberta{{portaAberta}}</h3>
             {% endif %}
             
             {% if erro is not none %}
-            <h3 id ="PortClosed">{{erro}}</h3>
+            <h3 id ="PortClosed">{{erro}} Fechada</h3>
             {% endif %}
         </div>
     </form>
