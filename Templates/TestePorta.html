@@ -14,12 +14,16 @@
         <h2 id="MeuIp" >Seu Ip: {{meuIp}}</h2>
         <form action="/porta" method="post">
             <label for="ip">Ip:</label>
-            <input type="text" id="ip" name="ip" style="opacity: 50%;" value="{{ip}}" required>
+            <input type="text" id="ip" name="ip" style=" color: black;" value="{{ip}}" required>
             <br></br>
-            <label for="porta">Porta:</label>
-            <input type="number" id="porta" value="{{porta}}" name="porta" required>
+            <div class="porta">
+                <label for="porta">Porta:</label>
+                <input type="number" id="porta" value="{{porta}}" style=" color: black;" name="porta" required>
+            </div>
             <br></br>
-            <input type="submit" value="Enviar">    
+            <div class="botaoEnviar">
+                <input id="botaoEnviar" type="submit" value="Enviar">    
+            </div>
             
             <div class="status">
                 <h1 >{{status}}</h1>

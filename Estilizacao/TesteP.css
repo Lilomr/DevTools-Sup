@@ -4,6 +4,10 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-family: Arial, sans-serif;
+
 }
 
 #titulo{
@@ -12,6 +16,19 @@ body{
     margin-top: 20px;
 }
 
+#porta{
+    width: 22%;
+}
+
+#botaoEnviar{
+    background-color: #07fc86;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
 
 
