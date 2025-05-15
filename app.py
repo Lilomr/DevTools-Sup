@@ -24,12 +24,12 @@ def receberPorta():
     try:
         status = port(request.form.get('ip'),
         request.form.get('porta',type=int))
-    except ValueError:
-        return render_template('TestePorta.html', 
-                                status = 'Porta Inválida')
     except socket.gaierror:
         return render_template('TestePorta.html', 
                                 status = 'IP Inválido')
+    except ValueError:
+        return render_template('TestePorta.html', 
+                                status = 'Porta Inválida')
     except TypeError:
         return render_template('TestePorta.html', 
                                 status = 'Porta Inválida')
