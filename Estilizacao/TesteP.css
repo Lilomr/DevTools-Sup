@@ -1,0 +1,17 @@
+body{
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#titulo{
+    color: #fc8607;
+    font-size: 50px;
+    margin-top: 20px;
+}
+
+
+
+

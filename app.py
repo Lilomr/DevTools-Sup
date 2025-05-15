@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,send_file
 import socket
 
 app = Flask(__name__, template_folder='Templates')
@@ -7,8 +7,11 @@ app = Flask(__name__, template_folder='Templates')
 def index():
     print(request.headers)
     return render_template('Entrada.html')
-    
-    
+
+@app.route('/Estilizacao/<path:path>')
+def send_js(path):
+    return send_file('Estilizacao/' + path)
+
 @app.route('/porta', methods=['GET'])
 def TestePorta():
     meuIp = (request.headers.get('X-Forwarded-For') or  
@@ -16,15 +19,12 @@ def TestePorta():
     request.headers.get('Remote-Addr'))
     return render_template('TestePorta.html',meuIp = meuIp, ip = meuIp, porta = 80) 
 
-    
 def port(endereco,porta):    
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(3)
     result = sock.connect_ex((endereco, porta))
     sock.close()
     return result == 0
-
-
 
 @app.route('/porta', methods=['POST'])
 def receberPorta():
@@ -50,9 +50,6 @@ def receberPorta():
         return render_template('TestePorta.html', ip = ip,
             porta = porta,
             status = 'Fechada')
-   
-    
-        
     
 if __name__ == '__main__':
     app.run(debug=True)
