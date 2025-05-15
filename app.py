@@ -21,7 +21,7 @@ def port(endereco,porta):
 @app.route('/porta', methods=['POST'])
 def receberPorta():
     return port(request.form.get('ip'),
-                request.form.get('porta'))
+                request.form.get('porta',type=int))
     
 if __name__ == '__main__':
     app.run(debug=True)
