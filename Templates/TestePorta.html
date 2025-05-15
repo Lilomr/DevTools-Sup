@@ -2,18 +2,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LILO</title>
+    <title></title>
+    <link rel="stylesheet" href="/Estilização/TestePorta.css">
 </head>
 <body>
+
     <h1>Teste de Portas</h1>
 
     <h3 id="MeuIp" >Seu Ip: {{meuIp}}</h3>
     <form action="/porta" method="post">
         <label for="ip">Ip:</label>
-        <input type="text" id="ip" name="ip" style="opacity: 50%;" required>
+        <input type="text" id="ip" name="ip" style="opacity: 50%;" value="{{ip}}" required>
         <br></br>
         <label for="porta">Porta:</label>
-        <input type="number" id="porta" name="porta" required>
+        <input type="number" id="porta" value="{{porta}}" name="porta" required>
         <br></br>
         <input type="submit" value="Enviar">    
 

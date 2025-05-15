@@ -6,11 +6,16 @@ app = Flask(__name__, template_folder='Templates')
 @app.route('/')
 def index():
     print(request.headers)
-    return render_template('TestePorta.html', 
-        meuIp = request.headers.get('X-Forwarded-For') or 
-        request.headers.get('X-Real-IP') or 
-        request.headers.get('Remote-Addr') 
-    )
+    return render_template('Entrada.html')
+    
+    
+@app.route('/porta', methods=['GET'])
+def TestePorta():
+    meuIp = (request.headers.get('X-Forwarded-For') or  
+    request.headers.get('X-Real-IP') or 
+    request.headers.get('Remote-Addr'))
+    return render_template('TestePorta.html',meuIp = meuIp, ip = meuIp, porta = 80) 
+
     
 def port(endereco,porta):    
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -19,31 +24,33 @@ def port(endereco,porta):
     sock.close()
     return result == 0
 
+
+
 @app.route('/porta', methods=['POST'])
 def receberPorta():
     try:
-        status = port(request.form.get('ip'),
-        request.form.get('porta',type=int))
+        porta = request.form.get('porta',type=int)
+        ip = request.form.get('ip')
+        print(type(porta))
+        print(type(ip))
+        status = port(ip,porta)
     except socket.gaierror:
         return render_template('TestePorta.html', 
                                 status = 'IP Inválido')
-    except ValueError:
-        return render_template('TestePorta.html', 
-                                status = 'Porta Inválida')
-    except TypeError:
+    except TypeError as e:
         return render_template('TestePorta.html', 
                                 status = 'Porta Inválida')
         
         
     if status == True:
-        return render_template('TestePorta.html', 
+        return render_template('TestePorta.html',ip = ip,
+            porta = porta,
             status = 'Aberta')
-    elif status == False:
-        return render_template('TestePorta.html', 
-            status = 'Fechada')
     else:
-        return render_template('TestePorta.html', 
-            status = 'Porta Inválida') 
+        return render_template('TestePorta.html', ip = ip,
+            porta = porta,
+            status = 'Fechada')
+   
     
         
     
