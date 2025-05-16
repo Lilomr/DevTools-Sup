@@ -1,5 +1,9 @@
+import dns.message
+import dns.name
+import dns.resolver
 from flask import Flask, render_template, request, send_file
 import socket
+import dns
 
 app = Flask(__name__, template_folder="Templates")
 
@@ -66,6 +70,34 @@ def receberPorta():
         ctx["color"] = "red"
 
     return render_template("TestePorta.html", **ctx)
+
+##################################################################################################
+
+@app.route("/dns", methods=["POST"])
+def receberDns():
+    ctx = {}
+    endereço = request.form.get("dns")
+    ctx["dns"] = endereço
+
+    name = dns.name.from_text(endereço)
+    resposta = None
+
+    try:
+        resposta = dns.resolver.resolve(name)
+    except dns.resolver.NoAnswer:
+        ctx["status"] = "Sem resposta"
+    except dns.resolver.NXDOMAIN:
+        ctx['status'] = "DNS Inválido"
+    if resposta:
+        ctx["status"] = "\n".join([a.to_text() for a in resposta.response.answer])
+    return render_template("TesteDns.html", **ctx)
+
+
+
+
+@app.route("/dns", methods=["GET"])
+def TesteDns():
+    return render_template("TesteDns.html")
 
 
 if __name__ == "__main__":
