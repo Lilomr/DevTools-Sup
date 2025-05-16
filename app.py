@@ -21,52 +21,44 @@ def TestePorta():
 
 def port(endereco,porta):    
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(3)
+    sock.settimeout(1)
     result = sock.connect_ex((endereco, porta))
     sock.close()
     return result == 0
 
 @app.route('/porta', methods=['POST'])
 def receberPorta():
+    ctx = {}
     try:
-        meuIp = (request.headers.get('X-Forwarded-For') or  
+        ctx['meuIp'] = (request.headers.get('X-Forwarded-For') or  
             request.headers.get('X-Real-IP') or 
             request.headers.get('Remote-Addr'))
-        porta = request.form.get('porta',type=int)
         ip = request.form.get('ip')
-        status = port(ip,porta)
-        ip = socket.gethostbyname(ip) 
+        ctx['ip'] = ip
+        porta = request.form.get('porta',type=int)
+        ctx['porta'] = porta
+        statusPorta = port(ip,porta)
+        ctx['ip'] = socket.gethostbyname(ip) 
 
     except socket.gaierror:
-        return render_template('TestePorta.html',
-                                ip = ip,
-                                porta = porta,
-                                meuIp = meuIp,
+        return render_template('TestePorta.html',**ctx,
                                 status = f'Servidor {ip} Inválido',)
     except TypeError as e:
-        return render_template('TestePorta.html', ip = ip,
-                                porta = porta,
-                                meuIp = meuIp,
+        return render_template('TestePorta.html',**ctx,
                                 status = f'Porta {porta} Inválida')
     except OverflowError:
-        return render_template('TestePorta.html',ip = ip,
-                                porta = porta,
-                                meuIp = meuIp,
+        return render_template('TestePorta.html',**ctx,
                                 status = f'Porta {porta} Inválida')
         
         
-    if status == True:        
-        return render_template('TestePorta.html',ip = ip,
-            porta = porta,
+    if statusPorta == True:        
+        return render_template('TestePorta.html',**ctx,
             status = 'Aberta',
-            meuIp = meuIp,
             color = 'green')
         
     else:
-        return render_template('TestePorta.html', ip = ip,
-            porta = porta,
+        return render_template('TestePorta.html',**ctx, 
             status = 'Fechada',
-            meuIp = meuIp,
             color = 'red')
     
 if __name__ == '__main__':
