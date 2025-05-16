@@ -1,4 +1,3 @@
-import dns.message
 import dns.name
 import dns.resolver
 from flask import Flask, render_template, request, send_file
@@ -71,7 +70,9 @@ def receberPorta():
 
     return render_template("TestePorta.html", **ctx)
 
+
 ##################################################################################################
+
 
 @app.route("/dns", methods=["POST"])
 def receberDns():
@@ -87,12 +88,10 @@ def receberDns():
     except dns.resolver.NoAnswer:
         ctx["status"] = "Sem resposta"
     except dns.resolver.NXDOMAIN:
-        ctx['status'] = "DNS Inválido"
+        ctx["status"] = "DNS Inválido"
     if resposta:
         ctx["status"] = "\n".join([a.to_text() for a in resposta.response.answer])
     return render_template("TesteDns.html", **ctx)
-
-
 
 
 @app.route("/dns", methods=["GET"])
