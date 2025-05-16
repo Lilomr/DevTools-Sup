@@ -1,4 +1,4 @@
-body{
+body {
     background-color: black;
     color: white;
     display: flex;
@@ -8,7 +8,7 @@ body{
 
 }
 
-h1{
+h1 {
     background-color: #fc7507;
     border: 2px solid #fc8607;
     color: white;
@@ -20,23 +20,37 @@ h1{
     padding-right: 0;
     margin-left: 0;
     margin-right: 0;
-    
+
 }
 
-.Entrada{
-    flex-direction: column;
+.Entrada {
+    margin-top: 500px;
+    display: grid;
     align-items: center;
-    justify-content: center;
-    margin-top: 100%;
-    
+
 }
-.Entrada > button{
+
+
+
+
+.TestePorta>button {
     background-color: #e3fc07;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 35px;
     font-size: 18px;
     cursor: pointer;
     border-radius: 5px;
+    margin: 5px;
 }
 
+.Dns>button {
+    background-color: #e3fc07;
+    color: white;
+    border: none;
+    padding: 8px 38px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px;
+}
