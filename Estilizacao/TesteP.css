@@ -32,3 +32,8 @@ body {
     cursor: pointer;
     border-radius: 5px;
 }
+
+.preStatus{
+    overflow: auto;
+    max-width: 80vw;
+}
