@@ -8,20 +8,23 @@
 </head>
 
 <body>
-    <h1 id="titulo">Teste DNS</h1>
-    <form action="/dns" method="post">
 
-        <label for="dns">DNS:</label>
-        <input type="text" id="dns" name="dns" value="{{dns}}" placeholder="exemplo.com">
-        <br></br>
+    <div class="container">
+        <h1 id="titulo">Teste DNS</h1>
+        <form action="/dns" method="post">
+            
+            <label for="dns">DNS:</label>
+            <input type="text" id="dns" name="dns" value="{{dns}}" placeholder="exemplo.com">
+            <br></br>
         <div class="botaoEnviar">
             <b><button>Testar</button></b>
         </form>
+    </div>
         
         <div class="status">
             <pre>{{status}}</pre>
         </div>
-            <h3>{{tipo}}</h3>
+        <h3>{{tipo}}</h3>
 </body>
 
 </html>
