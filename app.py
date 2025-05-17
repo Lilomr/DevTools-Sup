@@ -79,15 +79,16 @@ def receberDns():
     ctx = {}
     endereço = request.form.get("dns")
     ctx["dns"] = endereço
-
-    name = dns.name.from_text(endereço)
     resposta = None
 
     try:
+        name = dns.name.from_text(endereço)
         resposta = dns.resolver.resolve(name)
     except dns.resolver.NoAnswer:
         ctx["status"] = "Sem resposta"
     except dns.resolver.NXDOMAIN:
+        ctx["status"] = "DNS Inválido"
+    except dns.name.EmptyLabel:
         ctx["status"] = "DNS Inválido"
     if resposta:
         ctx["status"] = "\n".join([a.to_text() for a in resposta.response.answer])
