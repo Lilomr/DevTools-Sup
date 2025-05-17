@@ -52,6 +52,7 @@ def receberPorta():
         ctx["porta"] = porta
         statusPorta = port(ip, porta)
         ctx["ip"] = socket.gethostbyname(ip)
+        ctx["ip"] = socket.gethostname(ip)
 
     except socket.gaierror:
         ctx["status"] = f"Servidor {ip} Inválido"
