@@ -19,6 +19,11 @@ body {
     margin-top: 20px;
 }
 
+.botaoEnviar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .botaoEnviar>b>button {
     background-color: #1eff00;
@@ -44,7 +49,8 @@ body {
     border: none;
     border-bottom: 2px solid rgb(172, 171, 171);
 }
-label{
+
+label {
     font-family: monospace;
 }
 
