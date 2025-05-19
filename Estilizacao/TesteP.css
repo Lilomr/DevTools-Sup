@@ -19,9 +19,6 @@ body {
     margin-top: 20px;
 }
 
-#porta {
-    width: 22%;
-}
 
 .botaoEnviar>b>button {
     background-color: #1eff00;
@@ -33,15 +30,33 @@ body {
     border-radius: 5px;
 }
 
-.preStatus{
+.preStatus {
     overflow: auto;
     max-width: 80vw;
 }
 
-input {
+#porta {
+    background-color: black;
+    color: white;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
     border: none;
-    border-radius: 2px;
-    padding: 8px 10px;
+    border-bottom: 2px solid rgb(172, 171, 171);
+}
+label{
+    font-family: monospace;
+}
+
+input[type=text] {
+    background-color: black;
+    color: white;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid rgb(172, 171, 171);
 }
 
 .status {

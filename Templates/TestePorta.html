@@ -10,14 +10,14 @@
     <div class="container">
         <h1 style="font-size: 40px;" id="titulo">Teste de Portas</h1>
         
-        <h2 id="MeuIp" >Seu Ip: {{meuIp}}</h2>
         <form action="/porta" method="post">
-            <label for="ip">Servidor: </label>
-            <input type="text" id="ip" name="ip" style=" color: black;" value="{{ip}}" required>
+            <h2 id="MeuIp" >Seu Ip: {{meuIp}}</h2>
+            <label for="ip">Servidor</label>
+            <input type="text" id="ip" name="ip" value="{{ip}}" required>
             <br></br>
             <div class="porta">
-                <label for="porta">Porta:</label>
-                <input max="65535" min="0" type="number" id="porta" value="{{porta}}" style=" color: black;" name="porta" required>
+                <label for="porta">Porta</label>
+                <input max="65535" min="0" type="number" id="porta" value="{{porta}}"  name="porta" required>
             </div>
             <br></br>
             <div class="botaoEnviar">
