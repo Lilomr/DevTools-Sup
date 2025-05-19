@@ -25,7 +25,7 @@ def TestePorta():
         or request.headers.get("X-Real-IP")
         or request.headers.get("Remote-Addr")
     )
-    return render_template("TestePorta.html", meuIp=meuIp, ip=meuIp, porta=80)
+    return render_template("TestePorta.html", meuIp=meuIp,ip=meuIp, porta=80)
 
 
 def port(endereco, porta):
@@ -52,6 +52,7 @@ def receberPorta():
         ctx["porta"] = porta
         statusPorta = port(ip, porta)
         ctx["ip"] = socket.gethostbyname(ip)
+        ctx["ip2"] = ip
 
     except socket.gaierror:
         ctx["status"] = f"Servidor {ip} Inválido"
