@@ -37,3 +37,14 @@ body {
     overflow: auto;
     max-width: 80vw;
 }
+
+input {
+    border: none;
+    border-radius: 2px;
+    padding: 8px 10px;
+}
+
+.status {
+    text-align: center;
+    align-items: center;
+}
