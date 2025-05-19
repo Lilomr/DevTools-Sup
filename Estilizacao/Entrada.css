@@ -32,9 +32,9 @@ h1 {
 
 
 
-.TestePorta>button {
+.TestePorta>a>button {
     background-color: #e3fc07;
-    color: white;
+    color: black;
     border: none;
     padding: 8px 35px;
     font-size: 18px;
@@ -43,9 +43,9 @@ h1 {
     margin: 5px;
 }
 
-.Dns>button {
+.Dns>a>button {
     background-color: #e3fc07;
-    color: white;
+    color: black;
     border: none;
     padding: 8px 38px;
     font-size: 18px;
