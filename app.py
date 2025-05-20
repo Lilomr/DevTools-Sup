@@ -134,6 +134,7 @@ def receberCombo():
         ctx["porta1"] = porta1
         ctx["porta2"] = porta2
         ctx["ip2"] = socket.gethostbyname(ip)
+        
 
         #VERIFICA PORTAS
         if port(ip, porta1) == True:
