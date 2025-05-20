@@ -1,0 +1,63 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTools-Sup</title>
+    <link rel="stylesheet" href="/Estilizacao/TesteP.css">
+</head>
+
+<body>
+    <a href="/"><svg width="40px" height="40px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path fill="#e3fc07" d="M8 1.4l-2 1.3v-1.7h-2v3l-4 2.6 0.6 0.8 7.4-4.8 7.4 4.8 0.6-0.8z"></path>
+    <path fill="#fc7507" d="M8 4l-6 4v7h5v-3h2v3h5v-7z"></path>
+    </svg></a>
+    <div class="container">
+        <h1 style="font-size: 40px;" id="titulo">Teste Combo</h1>
+
+        <form action="/combo" method="post">
+            <h2 id="MeuIp">Seu Ip: {{meuIp}}</h2>
+            <label for="ip">Servidor</label>
+            <input type="text" id="ip" name="ip" value="{{ip}}" required>
+            <br></br>
+            <div class="porta">
+                <label for="porta1">1° Porta</label>
+                <input max="65535" min="0" type="number" id="porta" value="{{porta1}}" name="porta1" required>
+            </div>
+            <br></br>
+            <div class="porta">
+                <label for="porta2">2° Porta</label>
+                <input max="65535" min="0" type="number" id="porta" value="{{porta2}}" name="porta2" required>
+            </div>
+            <br></br>
+            <div class="botaoEnviar">
+                <b><button>Testar</button></b>
+            </div>
+        </form>
+  
+        {% if statusP1 and colorP1 %}
+
+            <div class="status">
+                <h3>Porta: <b>{{porta1}}</b><span style="color:{{ colorP1 }};">{{statusP1}}</span></h3>
+                <h3>Porta: <b>{{porta2}}</b><span style="color:{{ colorP2 }};">{{statusP2}}</span></h3>
+
+                {% if ip2 not in ip %}
+                    {% for rota in statusRota %}
+                        <b><li class="rota">{{ rota }}</li></b>
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+
+        {% elif statusIp %}
+
+            <div class="status">
+                <h3>{{statusIp}}</h3>
+            </div>
+
+        {% endif %}
+
+    </div>
+</body>
+
+</html>
