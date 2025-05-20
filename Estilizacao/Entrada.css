@@ -5,6 +5,7 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: Arial, sans-serif;
+    margin: 0;
 
 }
 
@@ -24,7 +25,7 @@ h1 {
 }
 
 .Entrada {
-    margin-top: 300px;
+    margin-top: 200px;
     display: grid;
     align-items: center;
 }
@@ -33,7 +34,7 @@ h1 {
 
 
 .TestePorta>a>button {
-    background-color: #e3fc07;
+    background-color: #fcec07;
     color: white;
     border: none;
     padding: 8px 35px;
@@ -44,10 +45,21 @@ h1 {
 }
 
 .Dns>a>button {
-    background-color: #e3fc07;
+    background-color: #fcec07;
     color: black;
     border: none;
     padding: 8px 38px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.Combo>a>button {
+    background-color: #fcec07;
+    color: black;
+    border: none;
+    padding: 8px 28px;
     font-size: 18px;
     cursor: pointer;
     border-radius: 5px;
