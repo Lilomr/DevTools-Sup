@@ -38,8 +38,14 @@
         {% if statusP1 and colorP1 %}
 
             <div class="status">
-                <h3>Porta: <b>{{porta1}}</b> <span style="color:{{ colorP1 }};">{{statusP1}}</span></h3>
-                <h3>Porta: <b>{{porta2}}</b> <span style="color:{{ colorP2 }};">{{statusP2}}</span></h3>
+                <h3>Porta: <b>{{porta1}}</b><span style="color:{{ colorP1 }};">{{statusP1}}</span></h3>
+                <h3>Porta: <b>{{porta2}}</b><span style="color:{{ colorP2 }};">{{statusP2}}</span></h3>
+
+                {% if ip2 not in ip %}
+                    {% for rota in statusRota %}
+                        <b><li class="rota">{{ rota }}</li></b>
+                    {% endfor %}
+                {% endif %}
 
             </div>
 
