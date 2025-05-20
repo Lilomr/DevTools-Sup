@@ -29,10 +29,7 @@ h1 {
     align-items: center;
 }
 
-
-
-
-.TestePorta>a>button {
+.TestePorta>a>button, .Dns>a>button, .Combo>a>button {
     background-color: #e3fc07;
     color: black;
     border: none;
@@ -41,15 +38,8 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
     margin: 5px;
-}
-
-.Dns>a>button {
-    background-color: #e3fc07;
-    color: black;
-    border: none;
-    padding: 8px 38px;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 5px;
+    min-width: 180px;
+    min-height: 45px;
+    max-width: 180px;
+    max-height: 45px;
 }
