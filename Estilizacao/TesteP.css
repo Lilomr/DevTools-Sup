@@ -67,3 +67,12 @@ input[type=text] {
     text-align: center;
     align-items: center;
 }
+
+.rota{
+    font-family: Arial;
+    font-size: 25px;
+    list-style-type: none;
+    color: white;
+    width: 100%;
+    border: none;
+}
