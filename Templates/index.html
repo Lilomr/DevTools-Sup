@@ -1,12 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}{% endblock %}</title>
-        {% block css %}{% endblock %}
-    </head>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index-menu-bar.css') }}">
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    <header class="header">
+        <ul class="menuBar">
+            <li>
+                <a class="toggle-button" id="toggleSidebar">
+                    <svg width="40px" height="40px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path d="M16 3v2h-15v-2h15zM1 10h15v-2h-15v2zM1 15h15v-2h-15v2z" fill="#111111" />
+                    </svg>
+                </a>
+            </li>
+        </ul>
+        <div class="menuTitle">
+            <h1>Teste Combo</h1>
+        </div>
+    </header>
+    <div class="sidebar" id="sidebar">
+        <li>
+            <a href="/">
+                <svg width="40px" height="40px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path fill="#111111" d="M8 1.4l-2 1.3v-1.7h-2v3l-4 2.6 0.6 0.8 7.4-4.8 7.4 4.8 0.6-0.8z"></path>
+                    <path fill="#111111" d="M8 4l-6 4v7h5v-3h2v3h5v-7z"></path>
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a href="/">
+                <svg width="40px" height="40px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path fill="#111111" d="M8 1.4l-2 1.3v-1.7h-2v3l-4 2.6 0.6 0.8 7.4-4.8 7.4 4.8 0.6-0.8z"></path>
+                    <path fill="#111111" d="M8 4l-6 4v7h5v-3h2v3h5v-7z"></path>
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a href="/">
+                <svg width="40px" height="40px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path fill="#111111" d="M8 1.4l-2 1.3v-1.7h-2v3l-4 2.6 0.6 0.8 7.4-4.8 7.4 4.8 0.6-0.8z"></path>
+                    <path fill="#111111" d="M8 4l-6 4v7h5v-3h2v3h5v-7z"></path>
+                </svg>
+            </a>
+        </li>
+    </div>
     {% block body %}
     
     {% endblock %}
+</body>
+
+<script>
+const toggleSidebar = document.getElementById('toggleSidebar');
+
+toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('expanded');
+			main.classList.toggle('expanded');
+        });
+</script>
 </html>
