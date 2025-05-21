@@ -23,6 +23,12 @@ body {
     width: 22%;
 }
 
+.botaoEnviar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .botaoEnviar>b>button{
     background-color: #1eff00;
     color: black;
@@ -70,7 +76,7 @@ input[type=text] {
 
 .rota{
     font-family: Arial;
-    font-size: 25px;
+    font-size: 15px;
     list-style-type: none;
     color: white;
     width: 100%;

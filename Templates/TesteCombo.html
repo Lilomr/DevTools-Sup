@@ -1,11 +1,12 @@
-<html lang="en">
+{% extends "index.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevTools-Sup</title>
-    <link rel="stylesheet" href="/Estilizacao/TesteP.css">
-</head>
+{% block title %}DevTools-Sup{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/Estilizacao/TesteP.css">
+{% endblock %}
+
+{% block body %}
 
 <body>
     <a href="/"><svg width="40px" height="40px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -34,8 +35,14 @@
                 <b><button>Testar</button></b>
             </div>
         </form>
-  
-        {% if statusP1 and colorP1 %}
+        
+        {% if statusIp %}
+
+            <div class="status">
+                <h3>{{statusIp}}</h3>
+            </div>
+
+        {% elif statusP1 and colorP1 %}
 
             <div class="status">
                 <h3>Porta: <b>{{porta1}}</b><span style="color:{{ colorP1 }};">{{statusP1}}</span></h3>
@@ -49,15 +56,9 @@
 
             </div>
 
-        {% elif statusIp %}
-
-            <div class="status">
-                <h3>{{statusIp}}</h3>
-            </div>
-
         {% endif %}
 
     </div>
 </body>
 
-</html>
+{% endblock %}

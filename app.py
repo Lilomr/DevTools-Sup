@@ -151,14 +151,22 @@ def receberCombo():
         
         #CRIA LISTA DE ROTAS
         if resposta:
-            rota = [a.to_text() for a in resposta.response.answer]
             statusRota = []
-            for i in range(len(rota)):
-                statusRota.append(rota[i].split('. ')[0])
-            statusRota.append(rota[i].split('A ')[1])
+
+            for answer in resposta.response.answer:
+                for item in answer.items:
+                    if item.rdtype == dns.rdatatype.A:
+                        statusRota.append(item.address)
+                    elif item.rdtype == dns.rdatatype.CNAME:
+                        statusRota.append(str(answer.name).strip('.'))
+                        statusRota.append(str(item.target).strip('.'))
+                    else:
+                        statusRota.append(item.to_text())
             ctx["statusRota"] = statusRota
 
     except socket.gaierror:
+        ctx["statusIp"] = f"Servidor {ip} Inválido"
+    except UnicodeError:
         ctx["statusIp"] = f"Servidor {ip} Inválido"
     except TypeError as e:
         ctx["statusP1"] = f"Porta {porta1} Inválida"
