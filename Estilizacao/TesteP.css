@@ -58,7 +58,7 @@ label {
     font-family: monospace;
 }
 
-input[type=text] {
+input[type=text], input[type=number] {
     background-color: black;
     color: white;
     width: 100%;

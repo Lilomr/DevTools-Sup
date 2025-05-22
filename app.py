@@ -10,7 +10,7 @@ app = Flask(__name__, template_folder="Templates")
 @app.route("/")
 def index():
     print(request.headers)
-    return render_template("Entrada.html")
+    return render_template("homepage.html")
 
 
 @app.route("/Estilizacao/<path:path>")
