@@ -1,8 +1,9 @@
 :root{
-    --color-carbon:#111111;
-    --color-orange:#FC7507;
-    --color-orangeDark:#C75B06;
-    --color-silver:#C0C0C0;
+    --color-texto: black;
+    --color-sidebar:#5e5e5e;
+    --color-navbar:#414141;
+    --color-navtext:#fc8607;
+    --color-hover:#C0C0C0;
 }
 
 body, ul, li, p{
@@ -11,16 +12,16 @@ body, ul, li, p{
     list-style: none;
     font-family: monospace;
     font-size: 1.2rem;
-    color: var(--color-carbon);
+    color: var(--color-texto);
 }
 
 body{
-    background: var(--color-carbon);
+    background: var(--color-navtext);
 }
 
 a{
     text-decoration: none;
-    color: var(--color-carbon);
+    color: var(--color-texto);
 }
 
 h1{
@@ -28,8 +29,8 @@ h1{
 }
 
 .menuBar a:hover, .menuTitle h1:hover, .toggle-button:hover, .sidebar a:hover {
-    color:var(--color-silver);
-    fill:var(--color-silver); 
+    color:var(--color-hover);
+    fill:var(--color-hover); 
 }
 
 .header{
@@ -37,7 +38,7 @@ h1{
     flex-wrap: row;
     align-items: center;
     height: 10vh;
-    background: var(--color-orangeDark);
+    background: var(--color-navbar);
 }
 
 .menuBar{
@@ -47,7 +48,7 @@ h1{
 .menuBar li{
     display: block;
     padding: 10px;
-    color: var(--color-carbon);
+    color: var(--color-texto);
 }
 
 .menuTitle {
@@ -59,7 +60,7 @@ h1{
 
 .menuTitle h1{
     width: 100%;
-    color: var(--color-carbon);
+    color: var(--color-navtext);
     font-size: 40px;
 }
 
@@ -72,7 +73,7 @@ h1{
     display: flex;
     align-items: center;
     justify-content: center;
-    fill:var(--color-carbon);
+    fill:var(--color-navtext);
 }
 
 .sidebar {
@@ -80,7 +81,7 @@ h1{
     margin-top: 0;
     position: fixed;
     height: 100%;
-    background: var(--color-orange);
+    background: var(--color-sidebar);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -90,12 +91,12 @@ h1{
 }
 
 .sidebar.expanded {
-    width: 200px; 
+    width: 150px; 
 }
 .sidebar li{
     width: 100%;
-    margin-top: 30px;
-    background-color: var(--color-orange); 
+    margin-top: 35px;
+    background-color: var(--color-sidebar); 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -104,13 +105,14 @@ h1{
 
 .sidebar a {
     width: 100%;
-    background-color: var(--color-orange); 
+    margin-left: 20px;
+    background-color: var(--color-sidebar); 
     cursor: pointer;
     justify-content: start;
     display: flex;
     flex-direction: row;
     transition: all 0.3s ease;
-    fill:var(--color-carbon);
+    fill:var(--color-texto);
 }
 
 .sidebar label{
