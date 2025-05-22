@@ -22,12 +22,23 @@
         </div>
     </header>
     <div class="sidebar" id="sidebar">
+       
         <li>
+            {% set current_path = request.path %}
+        {% if current_path != '/' %}
             <a href="/">{% include "svgCustom/menu-home.html" %}<label>Home</label></a>
+        {% endif %}
+        {% if current_path != '/dns' %}
             <a href="/dns">{% include "svgCustom/menu-dns.html" %}<label>Dns</label></a>
+        {% endif %}
+        {% if current_path != '/porta' %}
             <a href="/porta">{% include "svgCustom/menu-porta.html" %}<label>Porta</label></a>
+        {% endif %}
+        {% if current_path != '/combo' %}
             <a href="/combo">{% include "svgCustom/menu-combo.html" %}<label>Combo</label></a>
+        {% endif %}
         </li>
+       
     </div>
     <section class="container" id="container">
     {% block body %}
