@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="icon" type="image/svg+xml" href="static/svg/app-icon.svg">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='svg/app-icon.svg') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index-menu-bar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile_index-menu-bar.css') }}">
     {% block css %}{% endblock %}
