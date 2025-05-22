@@ -1,10 +1,4 @@
-:root{
-    --color-texto: black;
-    --color-sidebar:#5e5e5e;
-    --color-navbar:#414141;
-    --color-navtext:#fc8607;
-    --color-hover:#C0C0C0;
-}
+@import "var.css";
 
 body, ul, li, p{
     margin: 0px;
@@ -16,7 +10,7 @@ body, ul, li, p{
 }
 
 body{
-    background: var(--color-navtext);
+    background: none;
 }
 
 a{
@@ -91,7 +85,7 @@ h1{
 }
 
 .sidebar.expanded {
-    width: 150px; 
+    width: 150px;
 }
 .sidebar li{
     width: 100%;
@@ -122,4 +116,18 @@ h1{
     font-size: 20px;
     display: flex;
     align-items: center;
+}
+
+.container{
+    display: flex;
+    margin-left: 0px;
+    margin-top: 0;
+    height: 100%;
+    /*background: var(--color-sidebar);*/
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.container.expanded{
+    margin-left: 150px;
 }

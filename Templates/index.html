@@ -29,9 +29,11 @@
             <a href="/combo">{% include "svgCustom/menu-combo.html" %}<label>Combo</label></a>
         </li>
     </div>
+    <section class="container" id="container">
     {% block body %}
     
     {% endblock %}
+    </section>
 </body>
 
 <script>
@@ -39,6 +41,7 @@ const toggleSidebar = document.getElementById('toggleSidebar');
 
 toggleSidebar.addEventListener('click', () => {
             sidebar.classList.toggle('expanded');
+            container.classList.toggle('expanded');
 			main.classList.toggle('expanded');
         });
 </script>
