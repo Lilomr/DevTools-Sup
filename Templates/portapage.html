@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+{% block title %}DevTools-Sup{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/Estilizacao/TesteP.css">
+{% endblock %}
+
+{% block page %}Teste Porta{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <h2 id="MeuIp">Seu Ip: {{meuIp}}</h2>
+    <form action="/porta" method="post">
+        <label for="ip">Servidor: </label>
+        <input type="text" id="ip" name="ip" value="{{ip}}" required>
+        <br></br>
+        <div class="porta">
+            <label for="porta">Porta:</label>
+            <input max="65535" min="0" type="number" id="porta" value="{{porta}}" name="porta" required>
+        </div>
+        <br></br>
+        <div class="botaoEnviar">
+            <b><button>Testar</button></b>
+        </div>
+        <br></br>
+    </form>
+    {% if status and color %}
+    <div class="status">
+        <h3>Porta: <b>{{porta}}</b> <span style="color:{{ color }};">{{status}}</span> para o Servidor:
+            <b>{{ip}}</b>
+        </h3>
+        {% if ip2 not in ip %}
+        <h3><b>{{ip2}}</b></h3>
+        {% endif %}
+    </div>
+    {% elif status %}
+    <div class="status">
+        <h3>{{status}}</h3>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

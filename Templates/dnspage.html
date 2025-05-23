@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{% block title %}DevTools-Sup{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/Estilizacao/TesteP.css">
+{% endblock %}
+
+{% block page %}Teste DNS{% endblock %}
+
+{% block body %}
+<div class="container">
+    <form action="/dns" method="post">
+
+        <label for="dns">DNS:</label>
+        <input type="text" id="dns" name="dns" value="{{dns}}" placeholder="exemplo.com">
+        <br></br>
+        <div class="botaoEnviar">
+            <b><button>Testar</button></b>
+        </div>
+    </form>
+
+    <div class="status">
+        <pre class="preStatus">{{status}}</pre>
+    </div>
+    <h3>{{tipo}}</h3>
+</div>
+{% endblock %}

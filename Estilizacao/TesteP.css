@@ -82,3 +82,16 @@ input[type=text], input[type=number] {
     width: 100%;
     border: none;
 }
+
+.statusPorta {
+    min-width: 120px; 
+    padding: 8px; 
+    border-radius: 8px; 
+    background: #222; 
+    margin-bottom: 8px;
+}
+
+.statusPortaStr{
+    color: #fc8607; 
+    font-weight: bold;
+}

@@ -19,13 +19,13 @@ def send_js(path):
 
 
 @app.route("/porta", methods=["GET"])
-def TestePorta():
+def portaConstructor():
     meuIp = (
         request.headers.get("X-Forwarded-For")
         or request.headers.get("X-Real-IP")
         or request.headers.get("Remote-Addr")
     )
-    return render_template("TestePorta.html", meuIp=meuIp, ip=meuIp, porta=80)
+    return render_template("portapage.html", meuIp=meuIp, ip=meuIp, porta=80)
 
 
 def port(endereco, porta):
@@ -69,7 +69,7 @@ def receberPorta():
         ctx["status"] = "Fechada"
         ctx["color"] = "red"
 
-    return render_template("TestePorta.html", **ctx)
+    return render_template("portapage.html", **ctx)
 
 
 ##################################################################################################
@@ -93,34 +93,29 @@ def receberDns():
         ctx["status"] = "DNS Inválido"
     if resposta:
         ctx["status"] = "\n".join([a.to_text() for a in resposta.response.answer])
-    return render_template("TesteDns.html", **ctx)
+    return render_template("dnspage.html", **ctx)
 
 
 @app.route("/dns", methods=["GET"])
-def TesteDns():
-    return render_template("TesteDns.html")
+def dnsConstructor():
+    return render_template("dnspage.html")
 
 ##################################################################################################
 
 @app.route("/combo", methods=["GET"])
-def TesteCombo():
+def comboConstructor():
     meuIp = (
         request.headers.get("X-Forwarded-For")
         or request.headers.get("X-Real-IP")
         or request.headers.get("Remote-Addr")
     )
-    return render_template("TesteCombo.html", meuIp=meuIp, ip=meuIp, porta1=8181, porta2=5432)
+    portas = '8181,5432'
+    return render_template("combopage.html", meuIp=meuIp, ip=meuIp, portas=portas)
 
 @app.route("/combo", methods=["POST"])
 def receberCombo():
     ctx = {}
     try:
-        #SET STATUS BLOQUEADO
-        ctx["statusP1"] = "Fechada"
-        ctx["colorP1"] = "red"
-        ctx["statusP2"] = "Fechada"
-        ctx["colorP2"] = "red"
-
         #SET DADOS FORMULARIO
         ctx["meuIp"] = (
             request.headers.get("X-Forwarded-For")
@@ -128,23 +123,29 @@ def receberCombo():
             or request.headers.get("Remote-Addr")
         )
         ip = request.form.get("ip")
-        porta1 = request.form.get("porta1", type=int)
-        porta2 = request.form.get("porta2", type=int)
+        portas = request.form.get("portas")
+
+        portaP = []
+        statusP = []
+        colorP = []
+        for porta in portas.split(','):
+            if int(porta) <= 65535 and port(ip, int(porta)) == True:
+                portaP.append(f"{porta}")
+                statusP.append(f"Aberta")
+                colorP.append(f"green")
+            else :
+                portaP.append(f"{porta}")
+                statusP.append(f"Fechada")
+                colorP.append(f"red")
+
+        ctx["portaP"] = portaP
+        ctx["statusP"] = statusP
+        ctx["colorP"] = colorP
+
         ctx["ip"] = ip
-        ctx["porta1"] = porta1
-        ctx["porta2"] = porta2
         ctx["ip2"] = socket.gethostbyname(ip)
+        ctx["portas"] = portas
         
-
-        #VERIFICA PORTAS
-        if port(ip, porta1) == True:
-            ctx["statusP1"] = "Aberta"
-            ctx["colorP1"] = "green"
-
-        if port(ip, porta2) == True:
-            ctx["statusP2"] = "Aberta"
-            ctx["colorP2"] = "green"
-
         #VERIFICA DNS
         name = dns.name.from_text(ip)
         resposta = dns.resolver.resolve(name)
@@ -169,13 +170,9 @@ def receberCombo():
     except UnicodeError:
         ctx["statusIp"] = f"Servidor {ip} Inválido"
     except TypeError as e:
-        ctx["statusP1"] = f"Porta {porta1} Inválida"
+        ctx[f"statusP"] = f"Porta {porta} Inválida"
     except OverflowError:
-        ctx["statusP1"] = f"Porta {porta1} Inválida"
-    except TypeError as e:
-        ctx["statusP2"] = f"Porta {porta2} Inválida"
-    except OverflowError:
-        ctx["statusP2"] = f"Porta {porta2} Inválida"
+        ctx[f"statusP"] = f"Porta {porta} Inválida"
     except dns.resolver.NoAnswer:
         ctx["statusRota"] = "Sem resposta"
     except dns.resolver.NXDOMAIN:
@@ -183,7 +180,7 @@ def receberCombo():
     except dns.name.EmptyLabel:
         ctx["statusRota"] = "DNS Inválido"
 
-    return render_template("TesteCombo.html", **ctx)
+    return render_template("combopage.html", **ctx)
 
 if __name__ == "__main__":
     app.run(debug=True)
