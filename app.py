@@ -19,111 +19,88 @@ def index():
 def send_js(path):
     return send_file("Estilizacao/" + path)
 
+##################################################################################################
 
 @app.route("/porta", methods=["GET"])
 def portaConstructor():
-    meuIp = (
-        request.headers.get("X-Forwarded-For")
-        or request.headers.get("X-Real-IP")
-        or request.headers.get("Remote-Addr")
-    )
-    return render_template("portapage.html", meuIp=meuIp, ip=meuIp, porta=80)
-
-
-def port(endereco, porta):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(1)
-    result = sock.connect_ex((endereco, porta))
-    sock.close()
-    return result == 0
-
-
+    ctx = {}
+    ctx["meuIp"] = cs.getInicialPage()
+    ctx["ip"] = cs.getInicialPage()
+    ctx["porta"] = '80'
+    return render_template("portapage.html", **ctx)
+    
 @app.route("/porta", methods=["POST"])
 def receberPorta():
     ctx = {}
     try:
-        statusPorta = None
-        ctx["meuIp"] = (
-            request.headers.get("X-Forwarded-For")
-            or request.headers.get("X-Real-IP")
-            or request.headers.get("Remote-Addr")
-        )
+        #SET DADOS FORMULARIO
+        ctx["meuIp"] = cs.getInicialPage()
+        #RECEBE DADOS DO FORMULARIO
         ip = request.form.get("ip")
+        portas = request.form.get("porta")
+        #CONSULTA PORTA (UMA OU MAIS PORTAS)
+        result = []
+        result = cs.consultaPortas(ip, portas)
+        portaP = result[0]
+        statusP = result[1]
+        colorP = result[2]
+        #PREENCHE CONTEXTO PARA RETORNAR A PAGINA
+        ctx["porta"] = portaP[0]
+        ctx["status"] = statusP[0]
+        ctx["color"] = colorP[0]
         ctx["ip"] = ip
-        porta = request.form.get("porta", type=int)
-        ctx["porta"] = porta
-        statusPorta = port(ip, porta)
-        ctx["ip"] = socket.gethostbyname(ip)
-        ctx["ip2"] = ip
+        ctx["ip2"] = cs.socket.gethostbyname(ip)
 
     except socket.gaierror:
         ctx["status"] = f"Servidor {ip} Inválido"
-    except TypeError as e:
-        ctx["status"] = f"Porta {porta} Inválida"
-    except OverflowError:
-        ctx["status"] = f"Porta {porta} Inválida"
-
-    if statusPorta == True:
-        ctx["status"] = "Aberta"
-        ctx["color"] = "green"
-
-    elif statusPorta == False:
-        ctx["status"] = "Fechada"
-        ctx["color"] = "red"
+    #except TypeError as e:
+    #    ctx["status"] = f"Porta {porta} Inválida"
+    #except OverflowError:
+    #    ctx["status"] = f"Porta {porta} Inválida"
 
     return render_template("portapage.html", **ctx)
 
 
 ##################################################################################################
 
+@app.route("/dns", methods=["GET"])
+def dnsConstructor():
+    return render_template("dnspage.html")
 
 @app.route("/dns", methods=["POST"])
 def receberDns():
     ctx = {}
-    endereço = request.form.get("dns")
-    ctx["dns"] = endereço
-    resposta = None
-
     try:
-        name = dns.name.from_text(endereço)
-        resposta = dns.resolver.resolve(name)
+        ip = request.form.get("dns")
+        ctx["dns"] = ip
+        statusRota = []
+        statusRota = cs.consultaRotaDns(ip)
+        ctx["status"] = statusRota
     except dns.resolver.NoAnswer:
         ctx["status"] = "Sem resposta"
     except dns.resolver.NXDOMAIN:
         ctx["status"] = "DNS Inválido"
     except dns.name.EmptyLabel:
         ctx["status"] = "DNS Inválido"
-    if resposta:
-        ctx["status"] = "\n".join([a.to_text() for a in resposta.response.answer])
+
     return render_template("dnspage.html", **ctx)
-
-
-@app.route("/dns", methods=["GET"])
-def dnsConstructor():
-    return render_template("dnspage.html")
 
 ##################################################################################################
 
 @app.route("/combo", methods=["GET"])
 def comboConstructor():
-    meuIp = (
-        request.headers.get("X-Forwarded-For")
-        or request.headers.get("X-Real-IP")
-        or request.headers.get("Remote-Addr")
-    )
-    portas = '8181,5432'
-    return render_template("combopage.html", meuIp=meuIp, ip=meuIp, portas=portas)
+    ctx = {}
+    ctx["meuIp"] = cs.getInicialPage()
+    ctx["ip"] = cs.getInicialPage()
+    ctx["portas"] = '8181,5432'
+    return render_template("combopage.html", **ctx)
 
 @app.route("/combo", methods=["POST"])
 def receberCombo():
     ctx = {}
     try:
         #SET DADOS FORMULARIO
-        ctx["meuIp"] = (
-            request.headers.get("X-Forwarded-For")
-            or request.headers.get("X-Real-IP")
-            or request.headers.get("Remote-Addr")
-        )
+        ctx["meuIp"] = cs.getInicialPage()
         #RECEBE DADOS DO FORMULARIO
         ip = request.form.get("ip")
         portas = request.form.get("portas")

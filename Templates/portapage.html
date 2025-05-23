@@ -30,10 +30,10 @@
     {% if status and color %}
     <div class="status">
         <h3>Porta: <b>{{porta}}</b> <span style="color:{{ color }};">{{status}}</span> para o Servidor:
-            <b>{{ip}}</b>
+            <b>{{ip2}}</b>
         </h3>
         {% if ip2 not in ip %}
-        <h3><b>{{ip2}}</b></h3>
+        <h3><b>{{ip}}</b></h3>
         {% endif %}
     </div>
     {% elif status %}

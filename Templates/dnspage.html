@@ -21,7 +21,9 @@
     </form>
 
     <div class="status">
-        <pre class="preStatus">{{status}}</pre>
+        {% for rota in status %}
+            <pre class="preStatus">{{rota}}</pre>
+        {% endfor %}
     </div>
     <h3>{{tipo}}</h3>
 </div>

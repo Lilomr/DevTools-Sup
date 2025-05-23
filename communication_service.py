@@ -2,6 +2,15 @@ import socket
 import dns
 import dns.name
 import dns.resolver
+from flask import request
+
+def getInicialPage():
+    meuIp = (
+        request.headers.get("X-Forwarded-For")
+        or request.headers.get("X-Real-IP")
+        or request.headers.get("Remote-Addr")
+    )
+    return meuIp
 
 def consultaPortas(ip, portas):
         result = []
