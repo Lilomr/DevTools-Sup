@@ -3,58 +3,59 @@
 {% block title %}DevTools-Sup{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="/Estilizacao/TesteP.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/model-test.css') }}">
 {% endblock %}
 
 {% block page %}Combo Multiportas{% endblock %}
 
 {% block body %}
 
-    <div class="container">
-
+<div class="container">
+    <section class="box">
         <form action="/combo" method="post">
-            <h2 id="MeuIp">Seu Ip: {{meuIp}}</h2>
+            <h2 class="userRota" id="MeuIp">Seu Ip: {{meuIp}}</h2>
             <label for="ip">Servidor</label>
             <input type="text" id="ip" name="ip" value="{{ip}}" required>
             <br></br>
-            <div class="porta">
-                <label for="portas">Portas</label>
-                <input type="text" pattern="^\d{1,5}(,\d{1,5})*$" id="portas" value="{{portas}}" name="portas" required>
-            </div>
-            <div class="botaoEnviar">
-                <b><button>Testar</button></b>
+            <label for="portas">Portas</label>
+            <input type="text" pattern="^\d{1,5}(,\d{1,5})*$" id="portas" value="{{portas}}" name="portas" required>
+            <div class="containerEnviar">
+                <b><button class="botaoEnviar" >Testar</button></b>
             </div>
         </form>
-        
+    </section>
+    <section class="box">
         {% if statusIp %}
-
-            <div class="status">
+    
+            <div class="containerStatus">
                 <h3>{{statusIp}}</h3>
             </div>
-
+    
         {% elif statusP and colorP %}
-            <div class="status">
+            <div class="containerStatus">
             
-            {% for i in range(0, portaP|length) %}
-                {% set porta = portaP[i] %}
-                {% set status = statusP[i] %}
-                {% set color = colorP[i] %}
-                <div class="statusPorta">
-                    <span class="statusPortaStr">Porta {{porta}}:</span>
-                    <span class="statusPortaStr" style="color:{{color}};">{{status}}</span>
-                </div>
-            {% endfor %}
-
-            {% if ip2 and ip2 not in ip %}
-                {% for rota in statusRota %}
-                    <b><li class="rota">{{ rota }}</li></b>
+                {% for i in range(0, portaP|length) %}
+                    {% set porta = portaP[i] %}
+                    {% set status = statusP[i] %}
+                    {% set color = colorP[i] %}
+                    <div class="status">
+                        <span class="statusPorta">Porta {{porta}}:</span>
+                        <span class="statusPorta" style="color:{{color}};">{{status}}</span>
+                    </div>
                 {% endfor %}
-            {% endif %}
-
             </div>
-
+            <div class="containerRota">
+                {% if ip2 and ip2 not in ip %}
+                    {% for rota in statusRota %}
+                        <b><li class="rota">{{ rota }}</li></b>
+                    {% endfor %}
+                {% endif %}
+            </div>    
+    
+    
         {% endif %}
+    </section>
 
-    </div>
+</div>
 
 {% endblock %}

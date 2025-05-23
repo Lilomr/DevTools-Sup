@@ -1,0 +1,113 @@
+@import "var.css";
+
+body {
+    background: var(--color-background);
+}
+
+.container {
+    margin-top: 80px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.box {
+    background-color: var(--color-box);
+    height: 50%;
+    width: 40%;
+    border-radius: 20px;
+    border: solid var(--color-box-border);
+    justify-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.box form {
+    height: 80%;
+    width: 90%;
+}
+
+.userRota {
+    font-family: var(--font-global-rota);
+    text-align: center;
+}
+
+.box label {
+    font-family: var(--font-global-text);
+    text-align: left;
+}
+
+.box input {
+    font-family: var(--font-global-text);
+    text-align: left;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: transparent;
+    color: var(--color-texto);
+    border-bottom: 2px solid var(--color-background);
+}
+
+.containerEnviar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.botaoEnviar {
+    background-color: var(--color-button-service);
+    color: black;
+    border: none;
+    padding: 5px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.containerStatus {
+    display: flex;
+    flex-wrap:  wrap;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.status {
+    width: max-content; 
+    padding: 8px; 
+    border-radius: 8px; 
+    background: #222; 
+    margin-bottom: 8px;
+}
+
+.statusPorta{
+    color: var(--color-navtext); 
+    font-weight: bold;
+}
+
+.containerRota {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.rota{
+    font-family: Arial;
+    font-size: 15px;
+    list-style-type: none;
+    color: var(--color-texto);
+    width: 100%;
+    border: none;
+}
