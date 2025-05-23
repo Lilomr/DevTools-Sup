@@ -4,6 +4,8 @@ from flask import Flask, render_template, request, send_file
 import socket
 import dns
 
+import communication_service as cs
+
 app = Flask(__name__, template_folder="Templates")
 
 
@@ -122,57 +124,35 @@ def receberCombo():
             or request.headers.get("X-Real-IP")
             or request.headers.get("Remote-Addr")
         )
+        #RECEBE DADOS DO FORMULARIO
         ip = request.form.get("ip")
         portas = request.form.get("portas")
-
-        portaP = []
-        statusP = []
-        colorP = []
-        for porta in portas.split(','):
-            if int(porta) <= 65535 and port(ip, int(porta)) == True:
-                portaP.append(f"{porta}")
-                statusP.append(f"Aberta")
-                colorP.append(f"green")
-            else :
-                portaP.append(f"{porta}")
-                statusP.append(f"Fechada")
-                colorP.append(f"red")
-
+        #CONSULTA PORTA (UMA OU MAIS PORTAS)
+        result = []
+        result = cs.consultaPortas(ip, portas)
+        portaP = result[0]
+        statusP = result[1]
+        colorP = result[2]
+        #PREENCHE CONTEXTO PARA RETORNAR A PAGINA
         ctx["portaP"] = portaP
         ctx["statusP"] = statusP
         ctx["colorP"] = colorP
-
         ctx["ip"] = ip
-        ctx["ip2"] = socket.gethostbyname(ip)
+        ctx["ip2"] = cs.socket.gethostbyname(ip)
         ctx["portas"] = portas
-        
-        #VERIFICA DNS
-        name = dns.name.from_text(ip)
-        resposta = dns.resolver.resolve(name)
-        
-        #CRIA LISTA DE ROTAS
-        if resposta:
-            statusRota = []
-
-            for answer in resposta.response.answer:
-                for item in answer.items:
-                    if item.rdtype == dns.rdatatype.A:
-                        statusRota.append(item.address)
-                    elif item.rdtype == dns.rdatatype.CNAME:
-                        statusRota.append(str(answer.name).strip('.'))
-                        statusRota.append(str(item.target).strip('.'))
-                    else:
-                        statusRota.append(item.to_text())
-            ctx["statusRota"] = statusRota
+        #VERIFICA ROTA DNS
+        statusRota = []
+        statusRota = cs.consultaRotaDns(ip)
+        ctx["statusRota"] = statusRota
 
     except socket.gaierror:
         ctx["statusIp"] = f"Servidor {ip} Inválido"
     except UnicodeError:
         ctx["statusIp"] = f"Servidor {ip} Inválido"
-    except TypeError as e:
-        ctx[f"statusP"] = f"Porta {porta} Inválida"
-    except OverflowError:
-        ctx[f"statusP"] = f"Porta {porta} Inválida"
+    #except TypeError as e:
+    #    ctx[f"statusP"] = f"Porta {porta} Inválida"
+    #except OverflowError:
+    #    ctx[f"statusP"] = f"Porta {porta} Inválida"
     except dns.resolver.NoAnswer:
         ctx["statusRota"] = "Sem resposta"
     except dns.resolver.NXDOMAIN:
