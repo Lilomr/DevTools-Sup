@@ -21,15 +21,15 @@ def consultaPortas(ip, portas):
             if (porta.isdigit() == False or int(porta) > 65535):
                 portaP.append(f"{porta}")
                 statusP.append(f"Inválida")
-                colorP.append(f"#FC8607")
+                colorP.append(f"resultColorInvalid")
             elif int(porta) <= 65535 and port(ip, int(porta)) == True:
                 portaP.append(f"{porta}")
                 statusP.append(f"Aberta")
-                colorP.append(f"green")
+                colorP.append(f"resultColorOpen")
             else :
                 portaP.append(f"{porta}")
                 statusP.append(f"Fechada")
-                colorP.append(f"red")
+                colorP.append(f"resultColorClose")
         result.append(portaP)
         result.append(statusP)
         result.append(colorP)

@@ -40,8 +40,9 @@
                     {% set status = statusP[i] %}
                     {% set color = colorP[i] %}
                     <div class="status">
-                        <span class="statusPorta">Porta {{porta}}:</span>
-                        <span class="statusPorta" style="color:{{color}};">{{status}}</span>
+                        <span class="statusPorta">Porta: 
+                            <span class="resultColor">{{porta}}</span></span>
+                        <span class="{{color}} statusPorta">{{status}}</span>
                     </div>
                 {% endfor %}
             </div>
@@ -51,7 +52,7 @@
                         {% set rota = statusRota[i] %}
                         <div class="rota">
                             <span>{{i+1}}° Rota: </span>
-                            <span style="color: var(--color-hover);"">{{ rota }}</span>
+                            <span class="resultColor">{{ rota }}</span>
                         </div>
                     {% endfor %}
                 {% endif %}

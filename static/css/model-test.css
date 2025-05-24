@@ -36,7 +36,7 @@ body {
 
 .box, .boxResult{
     display: block;
-    background-color: transparent;
+    background-color: var(--color-box);
     backdrop-filter: blur(50px);
     border-radius: 20px;
     border: 2px solid var(--color-box-border);
@@ -76,7 +76,7 @@ body {
     border: none;
     background-color: transparent;
     color: var(--color-texto);
-    border-bottom: 2px solid var(--color-background);
+    border-bottom: 2px solid var(--color-box-border);
 }
 
 .containerEnviar {
@@ -89,7 +89,7 @@ body {
 
 .botaoEnviar {
     background-color: var(--color-button-service);
-    color: black;
+    color: var(--color-button-service-text);
     border: none;
     padding: 5px 20px;
     font-size: 20px;
@@ -123,7 +123,7 @@ body {
 }
 
 .statusPorta{
-    color: var(--color-navtext); 
+    color: var(--color-results-text); 
     font-weight: bold;
 }
 
@@ -137,9 +137,25 @@ body {
 .rota{
     font-size: 15px;
     list-style-type: none;
-    color: var(--color-navtext);
+    color: var(--color-results-text);
     border: none;
     width: 450px;
     height: 20px;
     margin-bottom: 10px;
+}
+
+.resultColor {
+    color: var(--color-results-retorno);
+}
+
+.resultColorOpen{
+    color: var(--color-results-open);
+}
+
+.resultColorClose{
+    color: var(--color-results-close);
+}
+
+.resultColorInvalid{
+    color: var(--color-results-invalid);
 }
