@@ -4,4 +4,12 @@
     font-size: 25px;
 }
 
+.container.expanded {
+    width: 100%;
+    margin-left: 0;
+}
+
+.sidebar {
+    z-index: 1;
+}
 }

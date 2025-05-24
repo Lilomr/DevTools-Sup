@@ -99,7 +99,7 @@ h1{
 }
 
 .sidebar a {
-    width: 100%;
+    width: calc(100% - 20px);
     margin-left: 20px;
     background-color: var(--color-sidebar); 
     cursor: pointer;
