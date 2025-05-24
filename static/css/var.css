@@ -1,5 +1,8 @@
 :root{
     --color-background: #000000;
+    --color-background-gradient: linear-gradient(-20deg, #C0C0C0, #5E5E5E);
+    /*linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);*/
+    --color-background-results: #222;
     --color-box: #C0C0C0;
     --color-box-border: #414141;
     --color-texto: #000000;

@@ -137,6 +137,8 @@ def receberCombo():
     except dns.name.EmptyLabel:
         ctx["statusRota"] = "DNS Inválido"
 
+    ctx["css"] = "boxResult"
+    
     return render_template("combopage.html", **ctx)
 
 ##################################################################################################
@@ -190,6 +192,10 @@ def receberTeste():
         ctx["statusRota"] = "DNS Inválido"
     except dns.name.EmptyLabel:
         ctx["statusRota"] = "DNS Inválido"
+
+    ctx["css"] = """.boxResult {
+    display: block;
+    }"""
 
     return render_template("testepage.html", **ctx)
 

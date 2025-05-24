@@ -1,25 +1,51 @@
 @import "var.css";
 
 body {
-    background: var(--color-background);
+	background: var(--color-background-gradient);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: calc(100% - 100px);
+    width: calc(100%);
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .container {
-    margin-top: 80px;
+    margin-top: 10px;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
 }
 
-.box {
-    background-color: var(--color-box);
-    height: 50%;
-    width: 50%;
+.disableBoxResult{
+    display: none;
+}
+
+.box, .boxResult{
+    display: block;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
     border-radius: 20px;
-    border: solid var(--color-box-border);
+    border: 2px solid var(--color-box-border);
+    height: max-content;
+    max-height: max-content;
+    min-height: max-content;
+    width: 80%;
+    max-width: 550px;
+    min-width: 400px;
     justify-items: center;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -83,12 +109,17 @@ body {
     margin-bottom: 15px;
 }
 
-.status {
-    width: max-content; 
-    padding: 8px; 
+.status, .rota{
+    font-family: var(--font-global-rota);
+    padding: 10px; 
     border-radius: 8px; 
-    background: #222; 
-    margin-bottom: 8px;
+    background: var(--color-background-results); 
+}
+
+.status {
+    width: 210px;
+    height: 25px;
+    margin-bottom: 5px;
 }
 
 .statusPorta{
@@ -99,16 +130,16 @@ body {
 .containerRota {
     display: flex;
     flex-direction: column;
-    text-align: center;
-    align-items: center;
-    justify-items: center;
+    text-align: left;
+    align-items: left;
 }
 
 .rota{
-    font-family: Arial;
     font-size: 15px;
     list-style-type: none;
-    color: var(--color-texto);
-    width: 100%;
+    color: var(--color-navtext);
     border: none;
+    width: 450px;
+    height: 20px;
+    margin-bottom: 10px;
 }

@@ -18,7 +18,11 @@ def consultaPortas(ip, portas):
         statusP = []
         colorP = []
         for porta in portas.split(','):
-            if int(porta) <= 65535 and port(ip, int(porta)) == True:
+            if (porta.isdigit() == False or int(porta) > 65535):
+                portaP.append(f"{porta}")
+                statusP.append(f"Inválida")
+                colorP.append(f"#FC8607")
+            elif int(porta) <= 65535 and port(ip, int(porta)) == True:
                 portaP.append(f"{porta}")
                 statusP.append(f"Aberta")
                 colorP.append(f"green")

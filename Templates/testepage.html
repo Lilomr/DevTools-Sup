@@ -4,6 +4,15 @@
 
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/model-test.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile_model-test.css') }}">
+{% endblock %}
+
+{% block style %}
+<style>
+    {% if css %}
+        {{css}}
+    {% endif %}
+</style>
 {% endblock %}
 
 {% block page %}Combo Multiportas{% endblock %}
@@ -20,11 +29,11 @@
             <label for="portas">Portas</label>
             <input type="text" pattern="^\d{1,5}(,\d{1,5})*$" id="portas" value="{{portas}}" name="portas" required>
             <div class="containerEnviar">
-                <b><button class="botaoEnviar" >Testar</button></b>
+                <b><button class="botaoEnviar" id="botaoEnviar" >Testar</button></b>
             </div>
         </form>
     </section>
-    <section class="box">
+    <section class="boxResult" id="boxResult">
         {% if statusIp %}
     
             <div class="containerStatus">
@@ -46,8 +55,12 @@
             </div>
             <div class="containerRota">
                 {% if ip2 and ip2 not in ip %}
-                    {% for rota in statusRota %}
-                        <b><li class="rota">{{ rota }}</li></b>
+                    {% for i in range(0, statusRota|length) %}
+                        {% set rota = statusRota[i] %}
+                        <div class="rota">
+                            <span>{{i+1}}° Rota: </span>
+                            <span style="color: var(--color-hover);"">{{ rota }}</span>
+                        </div>
                     {% endfor %}
                 {% endif %}
             </div>    
