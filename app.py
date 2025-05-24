@@ -139,5 +139,59 @@ def receberCombo():
 
     return render_template("combopage.html", **ctx)
 
+##################################################################################################
+
+@app.route("/teste", methods=["GET"])
+def testeConstructor():
+    ctx = {}
+    ctx["meuIp"] = cs.getInicialPage()
+    ctx["ip"] = cs.getInicialPage()
+    ctx["portas"] = '8181,5432'
+    return render_template("testepage.html", **ctx)
+
+@app.route("/teste", methods=["POST"])
+def receberTeste():
+    ctx = {}
+    try:
+        #SET DADOS FORMULARIO
+        ctx["meuIp"] = cs.getInicialPage()
+        #RECEBE DADOS DO FORMULARIO
+        ip = request.form.get("ip")
+        portas = request.form.get("portas")
+        #CONSULTA PORTA (UMA OU MAIS PORTAS)
+        result = []
+        result = cs.consultaPortas(ip, portas)
+        portaP = result[0]
+        statusP = result[1]
+        colorP = result[2]
+        #PREENCHE CONTEXTO PARA RETORNAR A PAGINA
+        ctx["portaP"] = portaP
+        ctx["statusP"] = statusP
+        ctx["colorP"] = colorP
+        ctx["ip"] = ip
+        ctx["ip2"] = cs.socket.gethostbyname(ip)
+        ctx["portas"] = portas
+        #VERIFICA ROTA DNS
+        statusRota = []
+        statusRota = cs.consultaRotaDns(ip)
+        ctx["statusRota"] = statusRota
+
+    except socket.gaierror:
+        ctx["statusIp"] = f"Servidor {ip} Inválido"
+    except UnicodeError:
+        ctx["statusIp"] = f"Servidor {ip} Inválido"
+    #except TypeError as e:
+    #    ctx[f"statusP"] = f"Porta {porta} Inválida"
+    #except OverflowError:
+    #    ctx[f"statusP"] = f"Porta {porta} Inválida"
+    except dns.resolver.NoAnswer:
+        ctx["statusRota"] = "Sem resposta"
+    except dns.resolver.NXDOMAIN:
+        ctx["statusRota"] = "DNS Inválido"
+    except dns.name.EmptyLabel:
+        ctx["statusRota"] = "DNS Inválido"
+
+    return render_template("testepage.html", **ctx)
+
 if __name__ == "__main__":
     app.run(debug=True)

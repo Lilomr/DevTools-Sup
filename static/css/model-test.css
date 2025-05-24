@@ -17,7 +17,7 @@ body {
 .box {
     background-color: var(--color-box);
     height: 50%;
-    width: 40%;
+    width: 50%;
     border-radius: 20px;
     border: solid var(--color-box-border);
     justify-items: center;
@@ -78,6 +78,7 @@ body {
     text-align: center;
     align-items: center;
     justify-items: center;
+    justify-content: center;
     margin-top: 15px;
     margin-bottom: 15px;
 }
