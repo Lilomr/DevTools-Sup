@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='svg/app-icon.svg') }}">
+    <link id="cssTema" class="0" rel="stylesheet" href="{{ url_for('static', filename='css/var.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index-menu-bar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile_index-menu-bar.css') }}">
     {% block css %}{% endblock %}
@@ -20,6 +21,11 @@
         <div class="menuTitle">
             <h1>{% block page %}{% endblock %}</h1>
         </div>
+        <ul class="menuBar">
+            <li>
+                <a class="tema-button" id="temaButton">{% include "svgCustom/menu-tema.html" %}</a>
+            </li>
+        </ul>
     </header>
     <div class="sidebar" id="sidebar">
        
@@ -49,10 +55,32 @@
 
 <script>
 const toggleSidebar = document.getElementById('toggleSidebar');
+const temaButton = document.getElementById('temaButton');
+const temaAtual = document.getElementById('cssTema');
+const temaSalvo = localStorage.getItem('tema');
 
 toggleSidebar.addEventListener('click', () => {
             sidebar.classList.toggle('expanded');
             container.classList.toggle('expanded');
         });
+
+temaButton.addEventListener('click', () => {
+            if (temaAtual.classList.contains('0')) {
+                document.getElementById("cssTema").href = "{{ url_for('static', filename='css/var-tema-moderno.css') }}";
+                document.getElementById("cssTema").className = "1";
+                localStorage.setItem('tema', temaAtual.href);
+            } 
+            else if (temaAtual.classList.contains('1')) {
+                document.getElementById("cssTema").href = "{{ url_for('static', filename='css/var.css') }}";
+                document.getElementById("cssTema").className = "0";
+                localStorage.setItem('tema', temaAtual.href);
+            };
+        });
+
+if (temaSalvo) {
+    temaAtual.href = temaSalvo;
+    temaAtual.className = temaSalvo.includes('var-tema-moderno') ? "1" : "0";
+}
+
 </script>
 </html>

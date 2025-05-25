@@ -1,5 +1,3 @@
-@import "var.css";
-
 body {
 	background: var(--color-background-gradient);
 	background-size: 400% 400%;
