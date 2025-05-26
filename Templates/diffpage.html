@@ -27,7 +27,7 @@
         <div class="resultado"
             style="background:white; color:black; min-height:50vh; width:45vw; margin-top:50px; padding:10px; overflow:auto;">
             {% for line, color in resultado %}
-            <span style="color:{{color}};">{{ line }}</span><br>
+            {{line}} <span style="color:{{color[1]}};">{{ color[0] }}</span><br>
             {% endfor %}
         </div>
         {% endfor %}

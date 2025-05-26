@@ -239,8 +239,8 @@ def diff_get():
         else:
             resultado1.append((line, "black"))
             resultado2.append((line, "black"))
-    ctx['resultado1'] = resultado1
-    ctx['resultado2'] = resultado2
+    ctx['resultado1'] = enumerate(resultado1, 1)
+    ctx['resultado2'] = enumerate(resultado2, 1)
     ctx["input1"] = input1
     ctx["input2"] = input2
     return render_template("diffpage.html", **ctx)
