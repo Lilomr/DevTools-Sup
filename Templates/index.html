@@ -43,6 +43,9 @@
         {% if current_path != '/combo' %}
             <a href="/combo">{% include "svgCustom/menu-combo.html" %}<label>Combo</label></a>
         {% endif %}
+        {% if current_path != '/diff' %}
+            <a href="/diff">{% include "svgCustom/menu-diff.html" %}<label>Diff</label></a>
+        {% endif %}
         </li>
        
     </div>

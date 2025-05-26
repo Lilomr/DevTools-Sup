@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block title %}DevTools-Sup{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/diff.css') }}">
+{% endblock %}
+
+{% block page %}Diff{% endblock %}
+
+{% block body %}
+<div class="diff-container">
+    <form action="/diff" method="post">
+        <div class="Diferenca" {% if resultado1 and resultado2 %}style="display:none;" {% endif %}>
+            <div class="textos">
+                <textarea class="texto1" id="input1" name="input1" placeholder="Texto original">{{input1}}</textarea>
+                <textarea class="texto2" id="input2" name="input2" placeholder="Texto modificado">{{input2}}</textarea>
+            </div>
+            <div class="comparar">
+                <button type="submit">Comparar</button>
+            </div>
+        </div>
+    </form>
+    {% if resultado1 and resultado2 %}
+    <div class="textos">
+        {% for resultado in [resultado1, resultado2] %}
+        <div class="resultado"
+            style="background:white; color:black; min-height:50vh; width:45vw; margin-top:50px; padding:10px; overflow:auto;">
+            {% for line, color in resultado %}
+            <span style="color:{{color}};">{{ line }}</span><br>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="voltar">
+        <form action="/diff" method="get">
+            <button type="submit" class="voltar">Comparar novamente</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -3,6 +3,7 @@ import dns.resolver
 from flask import Flask, render_template, request, send_file
 import socket
 import dns
+import difflib
 
 import communication_service as cs
 
@@ -19,32 +20,35 @@ def index():
 def send_js(path):
     return send_file("Estilizacao/" + path)
 
+
 ##################################################################################################
+
 
 @app.route("/porta", methods=["GET"])
 def portaConstructor():
     ctx = {}
     ctx["meuIp"] = cs.getInicialPage()
     ctx["ip"] = cs.getInicialPage()
-    ctx["porta"] = '80'
+    ctx["porta"] = "80"
     return render_template("portapage.html", **ctx)
-    
+
+
 @app.route("/porta", methods=["POST"])
 def receberPorta():
     ctx = {}
     try:
-        #SET DADOS FORMULARIO
+        # SET DADOS FORMULARIO
         ctx["meuIp"] = cs.getInicialPage()
-        #RECEBE DADOS DO FORMULARIO
+        # RECEBE DADOS DO FORMULARIO
         ip = request.form.get("ip")
         portas = request.form.get("porta")
-        #CONSULTA PORTA (UMA OU MAIS PORTAS)
+        # CONSULTA PORTA (UMA OU MAIS PORTAS)
         result = []
         result = cs.consultaPortas(ip, portas)
         portaP = result[0]
         statusP = result[1]
         colorP = result[2]
-        #PREENCHE CONTEXTO PARA RETORNAR A PAGINA
+        # PREENCHE CONTEXTO PARA RETORNAR A PAGINA
         ctx["porta"] = portaP[0]
         ctx["status"] = statusP[0]
         ctx["color"] = colorP[0]
@@ -53,9 +57,9 @@ def receberPorta():
 
     except socket.gaierror:
         ctx["status"] = f"Servidor {ip} Inválido"
-    #except TypeError as e:
+    # except TypeError as e:
     #    ctx["status"] = f"Porta {porta} Inválida"
-    #except OverflowError:
+    # except OverflowError:
     #    ctx["status"] = f"Porta {porta} Inválida"
 
     return render_template("portapage.html", **ctx)
@@ -63,9 +67,11 @@ def receberPorta():
 
 ##################################################################################################
 
+
 @app.route("/dns", methods=["GET"])
 def dnsConstructor():
     return render_template("dnspage.html")
+
 
 @app.route("/dns", methods=["POST"])
 def receberDns():
@@ -85,39 +91,42 @@ def receberDns():
 
     return render_template("dnspage.html", **ctx)
 
+
 ##################################################################################################
+
 
 @app.route("/combo", methods=["GET"])
 def comboConstructor():
     ctx = {}
     ctx["meuIp"] = cs.getInicialPage()
     ctx["ip"] = cs.getInicialPage()
-    ctx["portas"] = '8181,5432'
+    ctx["portas"] = "8181,5432"
     return render_template("combopage.html", **ctx)
+
 
 @app.route("/combo", methods=["POST"])
 def receberCombo():
     ctx = {}
     try:
-        #SET DADOS FORMULARIO
+        # SET DADOS FORMULARIO
         ctx["meuIp"] = cs.getInicialPage()
-        #RECEBE DADOS DO FORMULARIO
+        # RECEBE DADOS DO FORMULARIO
         ip = request.form.get("ip")
         portas = request.form.get("portas")
-        #CONSULTA PORTA (UMA OU MAIS PORTAS)
+        # CONSULTA PORTA (UMA OU MAIS PORTAS)
         result = []
         result = cs.consultaPortas(ip, portas)
         portaP = result[0]
         statusP = result[1]
         colorP = result[2]
-        #PREENCHE CONTEXTO PARA RETORNAR A PAGINA
+        # PREENCHE CONTEXTO PARA RETORNAR A PAGINA
         ctx["portaP"] = portaP
         ctx["statusP"] = statusP
         ctx["colorP"] = colorP
         ctx["ip"] = ip
         ctx["ip2"] = cs.socket.gethostbyname(ip)
         ctx["portas"] = portas
-        #VERIFICA ROTA DNS
+        # VERIFICA ROTA DNS
         statusRota = []
         statusRota = cs.consultaRotaDns(ip)
         ctx["statusRota"] = statusRota
@@ -126,9 +135,9 @@ def receberCombo():
         ctx["statusIp"] = f"Servidor {ip} Inválido"
     except UnicodeError:
         ctx["statusIp"] = f"Servidor {ip} Inválido"
-    #except TypeError as e:
+    # except TypeError as e:
     #    ctx[f"statusP"] = f"Porta {porta} Inválida"
-    #except OverflowError:
+    # except OverflowError:
     #    ctx[f"statusP"] = f"Porta {porta} Inválida"
     except dns.resolver.NoAnswer:
         ctx["statusRota"] = "Sem resposta"
@@ -138,42 +147,45 @@ def receberCombo():
         ctx["statusRota"] = "DNS Inválido"
 
     ctx["css"] = "boxResult"
-    
+
     return render_template("combopage.html", **ctx)
 
+
 ##################################################################################################
+
 
 @app.route("/teste", methods=["GET"])
 def testeConstructor():
     ctx = {}
     ctx["meuIp"] = cs.getInicialPage()
     ctx["ip"] = cs.getInicialPage()
-    ctx["portas"] = '8181,5432'
+    ctx["portas"] = "8181,5432"
     return render_template("testepage.html", **ctx)
+
 
 @app.route("/teste", methods=["POST"])
 def receberTeste():
     ctx = {}
     try:
-        #SET DADOS FORMULARIO
+        # SET DADOS FORMULARIO
         ctx["meuIp"] = cs.getInicialPage()
-        #RECEBE DADOS DO FORMULARIO
+        # RECEBE DADOS DO FORMULARIO
         ip = request.form.get("ip")
         portas = request.form.get("portas")
-        #CONSULTA PORTA (UMA OU MAIS PORTAS)
+        # CONSULTA PORTA (UMA OU MAIS PORTAS)
         result = []
         result = cs.consultaPortas(ip, portas)
         portaP = result[0]
         statusP = result[1]
         colorP = result[2]
-        #PREENCHE CONTEXTO PARA RETORNAR A PAGINA
+        # PREENCHE CONTEXTO PARA RETORNAR A PAGINA
         ctx["portaP"] = portaP
         ctx["statusP"] = statusP
         ctx["colorP"] = colorP
         ctx["ip"] = ip
         ctx["ip2"] = cs.socket.gethostbyname(ip)
         ctx["portas"] = portas
-        #VERIFICA ROTA DNS
+        # VERIFICA ROTA DNS
         statusRota = []
         statusRota = cs.consultaRotaDns(ip)
         ctx["statusRota"] = statusRota
@@ -182,9 +194,9 @@ def receberTeste():
         ctx["statusIp"] = f"Servidor {ip} Inválido"
     except UnicodeError:
         ctx["statusIp"] = f"Servidor {ip} Inválido"
-    #except TypeError as e:
+    # except TypeError as e:
     #    ctx[f"statusP"] = f"Porta {porta} Inválida"
-    #except OverflowError:
+    # except OverflowError:
     #    ctx[f"statusP"] = f"Porta {porta} Inválida"
     except dns.resolver.NoAnswer:
         ctx["statusRota"] = "Sem resposta"
@@ -193,11 +205,49 @@ def receberTeste():
     except dns.name.EmptyLabel:
         ctx["statusRota"] = "DNS Inválido"
 
-    ctx["css"] = """.boxResult {
+    ctx[
+        "css"
+    ] = """.boxResult {
     display: block;
     }"""
 
     return render_template("testepage.html", **ctx)
+
+
+##################################################################################################
+
+
+@app.route("/diff", methods=["GET"])
+def diff_get():
+    return render_template("diffpage.html")
+
+
+@app.route("/diff", methods=["POST"])
+def diff_post():
+    ctx = {}
+    input1 = request.form.get("input1", "")
+    input2 = request.form.get("input2", "")
+    diffs = list(difflib.ndiff(input1.splitlines(), input2.splitlines()))
+    resultado1 = []
+    resultado2 = []
+    for line in diffs:
+        if line.startswith("- "):
+            resultado1.append((line, "red"))
+            resultado2.append(("", ""))
+        elif line.startswith("+ "):
+            resultado1.append(("", ""))
+            resultado2.append((line, "green"))
+        elif line.startswith("? "):
+            continue
+        else:
+            resultado1.append((line, "black"))
+            resultado2.append((line, "black"))
+    ctx['resultado1'] = resultado1
+    ctx['resultado2'] = resultado2
+    ctx["input1"] = input1
+    ctx["input2"] = input2
+    return render_template("diffpage.html", **ctx)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
