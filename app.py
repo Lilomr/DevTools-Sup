@@ -217,13 +217,10 @@ def receberTeste():
 ##################################################################################################
 
 
-@app.route("/diff", methods=["GET"])
+@app.route("/diff", methods=["GET","POST"])
 def diff_get():
-    return render_template("diffpage.html")
-
-
-@app.route("/diff", methods=["POST"])
-def diff_post():
+    if request.method == "GET":
+        return render_template("diffpage.html")
     ctx = {}
     input1 = request.form.get("input1", "")
     input2 = request.form.get("input2", "")
@@ -247,7 +244,6 @@ def diff_post():
     ctx["input1"] = input1
     ctx["input2"] = input2
     return render_template("diffpage.html", **ctx)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
