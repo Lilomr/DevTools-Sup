@@ -24,49 +24,6 @@ def send_js(path):
 ##################################################################################################
 
 
-@app.route("/porta", methods=["GET"])
-def portaConstructor():
-    ctx = {}
-    ctx["meuIp"] = cs.getInicialPage()
-    ctx["ip"] = cs.getInicialPage()
-    ctx["porta"] = "80"
-    return render_template("portapage.html", **ctx)
-
-
-@app.route("/porta", methods=["POST"])
-def receberPorta():
-    ctx = {}
-    try:
-        # SET DADOS FORMULARIO
-        ctx["meuIp"] = cs.getInicialPage()
-        # RECEBE DADOS DO FORMULARIO
-        ip = request.form.get("ip")
-        portas = request.form.get("porta")
-        # CONSULTA PORTA (UMA OU MAIS PORTAS)
-        result = []
-        result = cs.consultaPortas(ip, portas)
-        portaP = result[0]
-        statusP = result[1]
-        colorP = result[2]
-        # PREENCHE CONTEXTO PARA RETORNAR A PAGINA
-        ctx["porta"] = portaP[0]
-        ctx["status"] = statusP[0]
-        ctx["color"] = colorP[0]
-        ctx["ip"] = ip
-        ctx["ip2"] = cs.socket.gethostbyname(ip)
-
-    except socket.gaierror:
-        ctx["status"] = f"Servidor {ip} Inválido"
-    # except TypeError as e:
-    #    ctx["status"] = f"Porta {porta} Inválida"
-    # except OverflowError:
-    #    ctx["status"] = f"Porta {porta} Inválida"
-
-    return render_template("portapage.html", **ctx)
-
-
-##################################################################################################
-
 
 @app.route("/dns", methods=["GET"])
 def dnsConstructor():
@@ -154,13 +111,7 @@ def receberCombo():
 ##################################################################################################
 
 
-@app.route("/teste", methods=["GET"])
-def testeConstructor():
-    ctx = {}
-    ctx["meuIp"] = cs.getInicialPage()
-    ctx["ip"] = cs.getInicialPage()
-    ctx["portas"] = "8181,5432"
-    return render_template("testepage.html", **ctx)
+
 
 
 @app.route("/teste", methods=["POST"])
