@@ -13,7 +13,7 @@ body {
 
 .service {
     background-color: var(--color-button-service);
-    color: black;
+    color: white;
     border: none;
     padding: 8px 35px;
     font-size: 18px;
