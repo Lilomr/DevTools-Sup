@@ -1,26 +1,23 @@
 :root {
-     --color-navbar: #001F3F;
-    --color-navtext: #E3E3E3;
-    --color-sidebar: #004F6D;
-    --color-sidebar-itens: #E3E3E3;
-    --color-hover: #4A4A4A;
-
-    --color-background: #000000;
-    --color-background-gradient: linear-gradient(-15deg, #F5F5DC, #8C8C8C);
-    --gradient:(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-
-    --color-box: transparent;
-    --color-box-border: #4A4A4A;
-    --color-texto: #000000;
-    --color-button-service: #001F3F;
-    --color-button-service-text: #E3E3E3;
-    --color-background-results: #004F6D;
-    --color-results-text: #000000;
-    --color-results-retorno: #E3E3E3;
+    --color-navbar: #0d1a2e;
+    --color-navtext: #ffffff;
+    --color-sidebar: #23272e;
+    --color-sidebar-itens: #e0e0e0;
+    --color-hover: black;
+    --color-background: #10131a;
+    --color-background-gradient: linear-gradient(-15deg, #232526 0%, #181c22 100%);
+    --gradient: (-45deg, #232526, #181c22, #004F6D);
+    --color-box: #23272e;
+    --color-box-border: #31343b;
+    --color-texto: #e0e0e0;
+    --color-button-service: #222b36;
+    --color-button-service-text: white;
+    --color-background-results: #23272e;
+    --color-results-text: #e0e0e0;
+    --color-results-retorno: #FC8607;
     --color-results-open: #39FF14;
     --color-results-close: #FF0000;
     --color-results-invalid: #FC8607;
-    
     --font-global-rota: monospace;
     --font-global-text: monospace;
 }

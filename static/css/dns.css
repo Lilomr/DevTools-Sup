@@ -1,6 +1,6 @@
 body {
-    background-color: black;
-    color: white;
+    background-color: var(--color-background);
+    color: var(--color-texto);
     font-family: Arial, sans-serif;
 }
 
@@ -14,13 +14,19 @@ body {
 }
 
 #titulo {
-    color: #fc8607;
+    color: var(--color-navtext);
     font-size: 40px;
     margin-top: 20px;
 }
 
 #porta {
     width: 22%;
+    background-color: var(--color-background);
+    color: var(--color-texto);
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: none;
+    border-bottom: 2px solid var(--color-box-border);
 }
 
 .botaoEnviar{
@@ -30,8 +36,8 @@ body {
 }
 
 .botaoEnviar>b>button{
-    background-color: #1eff00;
-    color: black;
+    background-color: var(--color-button-service);
+    color: var(--color-button-service-text);
     border: none;
     padding: 5px 20px;
     font-size: 20px;
@@ -39,29 +45,21 @@ body {
     border-radius: 5px;
 }
 
-#porta {
-    background-color: black;
-    color: white;
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: none;
-    border-bottom: 2px solid rgb(172, 171, 171);
-}
-
 label {
     font-family: monospace;
 }
 
 input[type=text], input[type=number] {
-    background-color: black;
-    color: white;
+    background-color: var(--color-background);
+    color: var(--color-texto);
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
     border: none;
-    border-bottom: 2px solid rgb(172, 171, 171);
+    border-bottom: 2px solid var(--color-box-border);
+    box-shadow: none;
+    outline: none;
 }
 
 .status > .preStatus{
@@ -75,7 +73,7 @@ input[type=text], input[type=number] {
     font-family: Arial;
     font-size: 15px;
     list-style-type: none;
-    color: white;
+    color: var(--color-texto);
     width: 100%;
     border: none;
 }
@@ -84,11 +82,11 @@ input[type=text], input[type=number] {
     min-width: 120px; 
     padding: 8px; 
     border-radius: 8px; 
-    background: #222; 
+    background: var(--color-background-results); 
     margin-bottom: 8px;
 }
 
 .statusPortaStr{
-    color: #fc8607; 
+    color: var(--color-navtext); 
     font-weight: bold;
 }

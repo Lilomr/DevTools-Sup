@@ -40,24 +40,23 @@ body {
     color: #222;
     border-radius: 12px;
     border: 1.5px solid #e0e0e0;
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.07);
+    box-shadow: none;
+    outline: none;
     padding: 18px 14px 18px 18px;
     font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
     transition: border 0.2s, box-shadow 0.2s;
 }
 .textos textarea:focus {
-    outline: none;
-    border: 2px solid var(--color-hover, #fc8607);
-    box-shadow: 0 0 0 2px #fc860733;
+    border: 2px solid green;
 }
 .textos > .texto1, .textos > .texto2 {
     background: #f7f7f7;
+    border: 2px solid #001F3F;
     color: #222;
 }
 .textos > .texto1:hover,
 .textos > .texto2:hover {
-    border: 2px solid var(--color-hover, #fc8607);
-    box-shadow: 0 0 0 2px #fc860733;
+    border: 2px solid green;
 }
 .comparar {
     width: 100%;
@@ -68,8 +67,8 @@ body {
 .comparar > button{
     display: flex;
     justify-content: center;
-    background: var(--color-button-service, #5E5E5E);
-    color: var(--color-button-service-text, #000);
+    background: var(--color-button-service);
+    color: white;
     padding: 10px 32px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -83,7 +82,7 @@ body {
 }
 .comparar > button:hover {
     background: var(--color-hover, #C0C0C0);
-    color: var(--color-button-service-text, #000);
+    color: white;
     box-shadow: 0 4px 16px 0 rgba(60,255,20,0.10);
 }
 .voltar>form>button {
@@ -121,25 +120,10 @@ body {
     line-height: 1.7;
     letter-spacing: 0.01em;
     transition: box-shadow 0.2s;
-    border: 1.5px solid #e0e0e0;
+    border: 2px solid #001F3F;
     word-break: break-word;
 }
-.resultado::-webkit-scrollbar {
-    width: 8px;
-    background: #f0f0f0;
-    border-radius: 8px;
-}
-.resultado::-webkit-scrollbar-thumb {
-    background: #d1d1d1;
-    border-radius: 8px;
-}
-.resultado span {
-    font-weight: 500;
-    padding-left: 2px;
-    padding-right: 2px;
-    border-radius: 4px;
-    transition: background 0.2s;
-}
+
 .resultado span[style*="color:red"] {
     background: #ffeaea;
 }
