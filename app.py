@@ -36,16 +36,21 @@ def receberDns():
     try:
         ip = request.form.get("dns")
         ctx["dns"] = ip
-        statusRota = []
-        statusRota = cs.consultaRotaDns(ip)
-        ctx["status"] = statusRota
+        import ipaddress
+        try:
+            ipaddress.IPv4Address(ip)
+            ctx["status"] = ip
+        except ValueError:
+            statusRota = cs.consultaRotaDns(ip)
+            ctx["status"] = statusRota
     except dns.resolver.NoAnswer:
         ctx["status"] = "Sem resposta"
     except dns.resolver.NXDOMAIN:
         ctx["status"] = "DNS Inválido"
     except dns.name.EmptyLabel:
         ctx["status"] = "DNS Inválido"
-
+    except Exception as e:
+        ctx["status"] = f"Erro: {str(e)}"
     return render_template("dnspage.html", **ctx)
 
 
