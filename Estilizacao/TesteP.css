@@ -39,11 +39,6 @@ body {
     border-radius: 5px;
 }
 
-.preStatus{
-    overflow: auto;
-    max-width: 80vw;
-}
-
 #porta {
     background-color: black;
     color: white;
@@ -69,9 +64,11 @@ input[type=text], input[type=number] {
     border-bottom: 2px solid rgb(172, 171, 171);
 }
 
-.status {
-    text-align: center;
+.status > .preStatus{
+    display: inline;
+    justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .rota{

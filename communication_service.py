@@ -44,6 +44,7 @@ def port(endereco, porta):
     return result == 0
 
 def consultaRotaDns(ip):
+    
     name = dns.name.from_text(ip)
     resposta = dns.resolver.resolve(name)
     
