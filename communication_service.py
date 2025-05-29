@@ -61,4 +61,5 @@ def consultaRotaDns(ip):
                     statusRota.append(str(item.target).strip('.'))
                 else:
                     statusRota.append(item.to_text())
+                    
     return statusRota

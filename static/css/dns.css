@@ -63,7 +63,7 @@ input[type=text], input[type=number] {
 }
 
 .status > .preStatus{
-    display: inline;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -79,7 +79,7 @@ input[type=text], input[type=number] {
 }
 
 .statusPorta {
-    min-width: 120px; 
+    min-width: 150px; 
     padding: 8px; 
     border-radius: 8px; 
     background: var(--color-background-results); 

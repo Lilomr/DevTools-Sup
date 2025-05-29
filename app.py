@@ -24,7 +24,6 @@ def send_js(path):
 ##################################################################################################
 
 
-
 @app.route("/dns", methods=["GET"])
 def dnsConstructor():
     return render_template("dnspage.html")
@@ -36,21 +35,16 @@ def receberDns():
     try:
         ip = request.form.get("dns")
         ctx["dns"] = ip
-        import ipaddress
-        try:
-            ipaddress.IPv4Address(ip)
-            ctx["status"] = ip
-        except ValueError:
-            statusRota = cs.consultaRotaDns(ip)
-            ctx["status"] = statusRota
+        statusRota = cs.consultaRotaDns(ip)
+        ctx["status"] = statusRota
     except dns.resolver.NoAnswer:
-        ctx["status"] = "Sem resposta"
+        ctx["status"] = ["Sem resposta"]
     except dns.resolver.NXDOMAIN:
-        ctx["status"] = "DNS Inválido"
+        ctx["status"] = ["DNS Inválido"]
     except dns.name.EmptyLabel:
-        ctx["status"] = "DNS Inválido"
+        ctx["status"] = ["DNS Inválido"]
     except Exception as e:
-        ctx["status"] = f"Erro: {str(e)}"
+        ctx["status"] = [f"Erro: {str(e)}"]
     return render_template("dnspage.html", **ctx)
 
 
@@ -116,9 +110,6 @@ def receberCombo():
 ##################################################################################################
 
 
-
-
-
 @app.route("/teste", methods=["POST"])
 def receberTeste():
     ctx = {}
@@ -173,7 +164,7 @@ def receberTeste():
 ##################################################################################################
 
 
-@app.route("/diff", methods=["GET","POST"])
+@app.route("/diff", methods=["GET", "POST"])
 def diff_get():
     if request.method == "GET":
         return render_template("diffpage.html")
@@ -195,11 +186,12 @@ def diff_get():
         else:
             resultado1.append((line, "black"))
             resultado2.append((line, "black"))
-    ctx['resultado1'] = enumerate(resultado1, 1)
-    ctx['resultado2'] = enumerate(resultado2, 1)
+    ctx["resultado1"] = enumerate(resultado1, 1)
+    ctx["resultado2"] = enumerate(resultado2, 1)
     ctx["input1"] = input1
     ctx["input2"] = input2
     return render_template("diffpage.html", **ctx)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

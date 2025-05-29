@@ -19,7 +19,7 @@ body {
 }
 
 .container {
-    margin-top: 10px;
+    margin-top: 50px;
     height: 100%;
     width: 100%;
     display: flex;
@@ -42,11 +42,15 @@ body {
     max-height: max-content;
     min-height: max-content;
     width: 80%;
-    max-width: 550px;
+    max-width: max-content;
     min-width: 400px;
     justify-items: center;
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.preStatus{
+    margin: 0;
 }
 
 .box form {
@@ -97,8 +101,7 @@ body {
 
 .containerStatus {
     display: flex;
-    flex-wrap:  wrap;
-    gap: 10px;
+    flex-direction: column;
     text-align: center;
     align-items: center;
     justify-items: center;
