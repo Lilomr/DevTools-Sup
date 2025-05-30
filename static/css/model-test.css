@@ -32,21 +32,29 @@ body {
     display: none;
 }
 
-.box, .boxResult{
+.box, .boxResult {
     display: block;
     background-color: var(--color-box);
     backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
     border-radius: 20px;
     border: 2px solid var(--color-box-border);
-    height: max-content;
-    max-height: max-content;
-    min-height: max-content;
-    width: 80%;
-    max-width: max-content;
-    min-width: 400px;
-    justify-items: center;
     margin-top: 15px;
     margin-bottom: 15px;
+    width: 30%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .box, .boxResult {
+        width: 60%;
+    }
+}
+
+@media (max-width: 600px) {
+    .box, .boxResult {
+        width: 95%;
+    }
 }
 
 .preStatus{
@@ -56,6 +64,7 @@ body {
 .box form {
     height: 80%;
     width: 90%;
+    margin: 0 auto;
 }
 
 .userRota {
@@ -69,8 +78,11 @@ body {
 }
 
 .box input {
+    display: block;
+    -webkit-appearance: none;
+    appearance: none;
     font-family: var(--font-global-text);
-    text-align: left;
+    align-items: center;
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
