@@ -138,7 +138,8 @@ body {
 }
 
 .status {
-    width: 210px;
+    min-width: 215px;
+    max-width: 300px;
     height: 25px;
     margin-bottom: 5px;
 }
