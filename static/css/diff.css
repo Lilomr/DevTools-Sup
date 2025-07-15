@@ -81,9 +81,11 @@ body {
     letter-spacing: 0.03em;
 }
 .comparar > button:hover {
-    background: var(--color-hover, #C0C0C0);
+    background: #13b172;
     color: white;
-    box-shadow: 0 4px 16px 0 rgba(60,255,20,0.10);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow:none;
+    outline: none;
 }
 .voltar>form>button {
     display: flex;
@@ -102,9 +104,11 @@ body {
     letter-spacing: 0.03em;
 }
 .voltar>form>button:hover {
-    background: var(--color-hover, #C0C0C0);
-    color: var(--color-button-service-text, #000);
-    box-shadow: 0 4px 16px 0 rgba(60,255,20,0.10);
+    background: #13b172;
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow:none;
+    outline: none;
 }
 .resultado {
     background: #fff;
