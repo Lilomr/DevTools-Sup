@@ -4,6 +4,7 @@ import dns.name
 import dns.resolver
 from flask import request
 
+
 def getInicialPage():
     meuIp = (
         request.headers.get("X-Forwarded-For")
@@ -12,28 +13,29 @@ def getInicialPage():
     )
     return meuIp
 
+
 def consultaPortas(ip, portas):
-        result = []
-        portaP = []
-        statusP = []
-        colorP = []
-        for porta in portas.split(','):
-            if (porta.isdigit() == False or int(porta) > 65535):
-                portaP.append(f"{porta}")
-                statusP.append(f"Inválida")
-                colorP.append(f"resultColorInvalid")
-            elif int(porta) <= 65535 and port(ip, int(porta)) == True:
-                portaP.append(f"{porta}")
-                statusP.append(f"Aberta")
-                colorP.append(f"resultColorOpen")
-            else :
-                portaP.append(f"{porta}")
-                statusP.append(f"Fechada")
-                colorP.append(f"resultColorClose")
-        result.append(portaP)
-        result.append(statusP)
-        result.append(colorP)
-        return result
+    result = []
+    portaP = []
+    statusP = []
+    colorP = []
+    for porta in portas.split(","):
+        if not porta.isdigit() or int(porta) > 65535:
+            portaP.append(f"{porta}")
+            statusP.append("Inválida")
+            colorP.append("resultColorInvalid")
+        elif int(porta) <= 65535 and port(ip, int(porta)):
+            portaP.append(f"{porta}")
+            statusP.append("Aberta")
+            colorP.append("resultColorOpen")
+        else:
+            portaP.append(f"{porta}")
+            statusP.append("Fechada")
+            colorP.append("resultColorClose")
+    result.append(portaP)
+    result.append(statusP)
+    result.append(colorP)
+    return result
 
 
 def port(endereco, porta):
@@ -43,12 +45,12 @@ def port(endereco, porta):
     sock.close()
     return result == 0
 
+
 def consultaRotaDns(ip):
-    
     name = dns.name.from_text(ip)
     resposta = dns.resolver.resolve(name)
-    
-    #CRIA LISTA DE ROTAS
+
+    # CRIA LISTA DE ROTAS
     if resposta:
         statusRota = []
 
@@ -57,9 +59,9 @@ def consultaRotaDns(ip):
                 if item.rdtype == dns.rdatatype.A:
                     statusRota.append(item.address)
                 elif item.rdtype == dns.rdatatype.CNAME:
-                    statusRota.append(str(answer.name).strip('.'))
-                    statusRota.append(str(item.target).strip('.'))
+                    statusRota.append(str(answer.name).strip("."))
+                    statusRota.append(str(item.target).strip("."))
                 else:
                     statusRota.append(item.to_text())
-                    
+
     return statusRota

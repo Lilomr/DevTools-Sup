@@ -152,9 +152,7 @@ def receberTeste():
     except dns.name.EmptyLabel:
         ctx["statusRota"] = "DNS Inválido"
 
-    ctx[
-        "css"
-    ] = """.boxResult {
+    ctx["css"] = """.boxResult {
     display: block;
     }"""
 
