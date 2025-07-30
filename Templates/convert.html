@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+{% block title %}DevTools-Sup{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/model-test.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile_model-test.css') }}">
+{% endblock %}
+
+{% block page %}{% endblock %}
+
+{% block body %}
+<div class="selectFileType">
+    <input type="file" name="file">
+    <button id="enviar" type="submit">enviar</button>
+</div>
+
+<script>
+    // submit file to /convert
+    const button= document.querySelector('#enviar');
+    button.onclick = async (e) => {
+        e.preventDefault();
+        const fileInput = document.querySelector('input[type="file"]');
+        const file = fileInput.files[0];
+        if (!file) {
+            alert('Por favor, selecione um arquivo.');
+            return;
+        }
+        const formData = new FormData();
+        formData.append('file', file);
+        try {
+            const response = await fetch('/convert', {
+                method: 'POST',
+                body: formData
+            });
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                const disposition = response.headers.get('Content-Disposition');
+                let filename = 'converted.pdf';
+                if (disposition && disposition.includes('filename=')) {
+                    filename = disposition.split('filename=')[1].replace(/['"]/g, '');
+                }
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            } else {
+                alert('Erro ao converter o arquivo. Tente novamente.');
+            }
+        } catch (error) {
+            alert('Falha na comunicação com o servidor: ' + error.message);
+        }
+    };
+</script>
+
+{% endblock %}

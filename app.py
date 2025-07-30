@@ -4,8 +4,8 @@ from flask import Flask, render_template, request, send_file
 import socket
 import dns
 import difflib
-
 import communication_service as cs
+import convert as cv
 
 app = Flask(__name__, template_folder="Templates")
 
@@ -189,6 +189,26 @@ def diff_get():
     ctx["input1"] = input1
     ctx["input2"] = input2
     return render_template("diffpage.html", **ctx)
+
+
+##################################################################################################
+
+
+@app.route("/convert", methods=["GET"])
+def qqc():
+    ctx = {}
+    return render_template("convert.html", **ctx)
+
+
+@app.route("/convert", methods=["POST"])
+def to_pdf():
+    file = request.files.get("file")
+    print(file)
+    csv_to_pdf = cv.csv_to_pdf(file)
+    print(csv_to_pdf)
+    csv_to_pdf.seek(0)
+    return send_file(csv_to_pdf, 
+                download_name=file.filename + ".pdf")
 
 
 if __name__ == "__main__":
