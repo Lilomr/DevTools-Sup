@@ -208,21 +208,21 @@ def to_pdf():
     content_type = file.content_type
     pdf_name = file.filename.split(".")[0].lower() + ".pdf"
     if content_type == "text/csv":
-        pdf_buffer = cv.csv_para_pdf(file)
+        pdf_buffer = cv.csv_para_pdf(file, titulo_pdf=pdf_name)
     elif (
         content_type
         == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         or content_type == "application/vnd.ms-excel"
     ):
-        pdf_buffer = cv.excel_para_pdf(file)
+        pdf_buffer = cv.excel_para_pdf(file, titulo_pdf=pdf_name)
     elif (
         content_type == "image/png"
         or content_type == "image/jpeg"
         or content_type == "image/jpg"
     ):
-        pdf_buffer = cv.imagem_para_pdf(file)
+        pdf_buffer = cv.imagem_para_pdf(file, titulo_pdf=pdf_name)
     elif content_type == "text/plain":
-        pdf_buffer = cv.texto_para_pdf(file)
+        pdf_buffer = cv.texto_para_pdf(file, titulo_pdf=pdf_name)
     else:
         ctx["retorno"] = "Formato de arquivo não suportado"
         return render_template("convert.html", **ctx)
