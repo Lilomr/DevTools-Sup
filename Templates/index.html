@@ -43,6 +43,9 @@
         {% if current_path != '/diff' %}
             <a href="/diff">{% include "svgCustom/menu-diff.html" %}<label>Diff</label></a>
         {% endif %}
+        {% if current_path != '/convert' %}
+            <a href="/convert">{% include "svgCustom/menu-convert.html" %}<label>Arquivo</label></a>
+        {% endif %}
         </li>
        
     </div>

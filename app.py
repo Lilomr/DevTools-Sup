@@ -1,11 +1,12 @@
 import dns.name
 import dns.resolver
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, url_for
 import socket
 import dns
 import difflib
 import communication_service as cs
 import convert as cv
+import os
 
 app = Flask(__name__, template_folder="Templates")
 
@@ -202,13 +203,39 @@ def qqc():
 
 @app.route("/convert", methods=["POST"])
 def to_pdf():
+    ctx = {}
     file = request.files.get("file")
-    print(file)
-    csv_to_pdf = cv.csv_to_pdf(file)
-    print(csv_to_pdf)
-    csv_to_pdf.seek(0)
-    return send_file(csv_to_pdf, 
-                download_name=file.filename + ".pdf")
+    content_type = file.content_type
+    pdf_name = file.filename.split(".")[0].lower() + ".pdf"
+    if content_type == "text/csv":
+        pdf_buffer = cv.csv_para_pdf(file)
+    elif (
+        content_type
+        == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        or content_type == "application/vnd.ms-excel"
+    ):
+        pdf_buffer = cv.excel_para_pdf(file)
+    elif (
+        content_type == "image/png"
+        or content_type == "image/jpeg"
+        or content_type == "image/jpg"
+    ):
+        pdf_buffer = cv.imagem_para_pdf(file)
+    elif content_type == "text/plain":
+        pdf_buffer = cv.texto_para_pdf(file)
+    else:
+        ctx["retorno"] = "Formato de arquivo não suportado"
+        return render_template("convert.html", **ctx)
+    output_dir = os.path.join("static", "convertidos")
+    os.makedirs(output_dir, exist_ok=True)
+    output_filename = f"{pdf_name}"
+    output_path = os.path.join(output_dir, output_filename)
+    with open(output_path, "wb") as f:
+        f.write(pdf_buffer.read())
+
+    ctx["download_url"] = url_for("static", filename=f"convertidos/{output_filename}")
+    ctx["nome_arquivo"] = pdf_name
+    return render_template("convert.html", **ctx)
 
 
 if __name__ == "__main__":

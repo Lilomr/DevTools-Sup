@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.13"
 
 [[package]]
@@ -158,9 +158,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "dnspython" },
     { name = "flask" },
-    { name = "numpy" },
     { name = "pandas" },
-    { name = "reportlab" },
     { name = "xhtml2pdf" },
 ]
 
@@ -173,9 +171,7 @@ dev = [
 requires-dist = [
     { name = "dnspython", specifier = ">=2.7.0" },
     { name = "flask", specifier = ">=3.1.1" },
-    { name = "numpy", specifier = ">=2.3.2" },
     { name = "pandas", specifier = ">=2.3.1" },
-    { name = "reportlab", specifier = ">=4.4.3" },
     { name = "xhtml2pdf", specifier = ">=0.2.17" },
 ]
 

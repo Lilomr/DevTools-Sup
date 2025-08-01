@@ -3,57 +3,84 @@
 {% block title %}DevTools-Sup{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/model-test.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile_model-test.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/convert.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 {% endblock %}
 
-{% block page %}{% endblock %}
+{% block page %}Converter Arquivo{% endblock %}
 
 {% block body %}
-<div class="selectFileType">
-    <input type="file" name="file">
-    <button id="enviar" type="submit">enviar</button>
+<div class="container-fluid py-5 ">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card shadow-lg border-2 convert-card">
+                <div class="card-header text-center py-4 convert-header">
+                    <h2 class="mb-0">
+                        <i class="bi bi-file-earmark-arrow-down me-2"></i>
+                        Conversor de Arquivos
+                    </h2>
+                </div>
+
+                <div class="card-body p-5 convert-body">
+                    {% if retorno %}
+                    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        {{ retorno }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    {% endif %}
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="fileInput" class="form-label h5 convert-label">
+                                <i class="bi bi-cloud-upload me-2 convert-icon"></i>Selecione o arquivo
+                            </label>
+                            <div
+                                class="border border-2 border-dashed rounded-3 p-4 text-center convert-border convert-bg">
+                                <i class="bi bi-file-earmark-plus display-4 mb-3 convert-icon"></i>
+                                <input class="form-control form-control-lg" type="file" id="fileInput" name="file"
+                                    required>
+                                <small class="mt-2 d-block convert-help">
+                                    Formatos aceitos: CSV, Excel, TXT, PNG, JPG, JPEG
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="formatSelect" class="form-label h5 convert-label">
+                                <i class="bi bi-arrow-repeat me-2 convert-icon"></i>Formato de destino
+                            </label>
+                            <select class="form-select form-select-lg convert-border convert-bg convert-label"
+                                id="formatSelect" name="format" required>
+                                <option value="pdf" selected>📄 PDF - Documento Portátil</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-lg py-3 convert-btn">
+                                <i class="bi bi-magic me-2"></i>
+                                Converter Arquivo
+                            </button>
+                        </div>
+                    </form>
+                    {% if download_url %}
+                    <div class="alert alert-success mt-4 text-center">
+                        <i class="bi bi-check-circle me-2"></i>
+                        Arquivo convertido com sucesso!
+                        <a href="{{ download_url }}" class="btn btn-success ms-3 mt-2" download="{{ nome_arquivo }}">
+                            <i class="bi bi-download me-1"></i> Baixar {{ nome_arquivo }}
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
-<script>
-    // submit file to /convert
-    const button= document.querySelector('#enviar');
-    button.onclick = async (e) => {
-        e.preventDefault();
-        const fileInput = document.querySelector('input[type="file"]');
-        const file = fileInput.files[0];
-        if (!file) {
-            alert('Por favor, selecione um arquivo.');
-            return;
-        }
-        const formData = new FormData();
-        formData.append('file', file);
-        try {
-            const response = await fetch('/convert', {
-                method: 'POST',
-                body: formData
-            });
-            if (response.ok) {
-                const blob = await response.blob();
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                const disposition = response.headers.get('Content-Disposition');
-                let filename = 'converted.pdf';
-                if (disposition && disposition.includes('filename=')) {
-                    filename = disposition.split('filename=')[1].replace(/['"]/g, '');
-                }
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            } else {
-                alert('Erro ao converter o arquivo. Tente novamente.');
-            }
-        } catch (error) {
-            alert('Falha na comunicação com o servidor: ' + error.message);
-        }
-    };
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
+    </script>
 {% endblock %}
