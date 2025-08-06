@@ -1,7 +1,7 @@
 body, ul, li, p{
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
+    margin: 0px !important;
+    padding: 0px !important;
+    list-style: none ;
     font-family: monospace;
     font-size: 1.2rem;
     color: var(--color-texto);
@@ -12,7 +12,7 @@ body{
 }
 
 a{
-    text-decoration: none;
+    text-decoration: none !important;
     --color: var(--color-texto);
 }
 
@@ -100,7 +100,7 @@ h1{
 }
 .sidebar li{
     width: 100%;
-    margin-top: 35px;
+    margin-top: 35px !important;
     display: flex;
     flex-direction: column;
     align-items: center;
