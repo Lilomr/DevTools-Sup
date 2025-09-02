@@ -6,8 +6,9 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Table
 from reportlab.lib.styles import getSampleStyleSheet
 
 
-def csv_para_pdf(arquivo, linhas_por_pagina=40, titulo_pdf=""): 
+def csv_para_pdf(arquivo, linhas_por_pagina=40, titulo_pdf=""):
     from reportlab.platypus import Table, PageBreak
+
     buffer = io.BytesIO()
     df = pd.read_csv(arquivo)
     doc = SimpleDocTemplate(buffer, pagesize=letter, title=titulo_pdf)
@@ -16,7 +17,7 @@ def csv_para_pdf(arquivo, linhas_por_pagina=40, titulo_pdf=""):
     story = []
     total_linhas = len(dados)
     for i in range(0, total_linhas, linhas_por_pagina):
-        pagina = [colunas] + dados[i:i+linhas_por_pagina]
+        pagina = [colunas] + dados[i : i + linhas_por_pagina]
         tabela = Table(pagina, repeatRows=1)
         story.append(tabela)
         if i + linhas_por_pagina < total_linhas:
@@ -39,10 +40,10 @@ def excel_para_pdf(arquivo, titulo_pdf=""):
 
 def texto_para_pdf(arquivo, titulo_pdf=""):
     buffer = io.BytesIO()
-    if hasattr(arquivo, 'read'):
-        texto = arquivo.read().decode('utf-8')
+    if hasattr(arquivo, "read"):
+        texto = arquivo.read().decode("utf-8")
     else:
-        with open(arquivo, encoding='utf-8') as f:
+        with open(arquivo, encoding="utf-8") as f:
             texto = f.read()
     doc = SimpleDocTemplate(buffer, pagesize=letter, title=titulo_pdf)
     styles = getSampleStyleSheet()

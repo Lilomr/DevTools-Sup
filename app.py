@@ -237,6 +237,22 @@ def to_pdf():
     ctx["nome_arquivo"] = pdf_name
     return render_template("convert.html", **ctx)
 
+@app.route("/sql", methods=["GET","POST"])
+def sqlView():
+    from sqlCreate import runViews, RunInserts
+    ctx = {}
+    if request.method == "GET":
+        return render_template("sqlpage.html")
+    if request.method == "POST" and request.form.get("sql") == "V":
+        zip_path = runViews()
+        zip_path.seek(0)
+        return send_file(zip_path, mimetype='application/zip', as_attachment=True, download_name=zip_path.name)
+    if request.method == "POST" and request.form.get("sql") == "I":
+        #PRECISA PEGAR O ARQUIVO DE CNPJS
+        zip_path = RunInserts()
+        zip_path.seek(0)
+        return send_file(zip_path, mimetype='application/zip', as_attachment=True, download_name=zip_path.name)
+    return render_template("sqlpage.html", **ctx)
 
 if __name__ == "__main__":
     app.run(debug=True)
