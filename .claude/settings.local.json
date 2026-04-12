@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l /c/Users/Lilinho/DevTools-Sup/*.py)",
+      "Bash(wc -l /c/Users/Lilinho/DevTools-Sup/Templates/*.html)",
+      "Bash(wc -l /c/Users/Lilinho/DevTools-Sup/Templates/svgCustom/*.html)"
+    ]
+  }
+}

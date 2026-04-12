@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Converter Arquivo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="page-wrap">
+    <div class="page-box">
+
+      <ion-card>
+        <ion-card-content>
+          <div class="upload-area" (click)="fileInput.click()">
+            <ion-icon name="cloud-upload-outline" class="upload-icon"></ion-icon>
+            @if (selectedFile) {
+              <p class="upload-name">{{ selectedFile.name }}</p>
+              <p class="upload-hint">Toque para trocar o arquivo</p>
+            } @else {
+              <p class="upload-title">Selecionar arquivo</p>
+              <p class="upload-hint">CSV · XLS · XLSX · TXT · PNG · JPG</p>
+            }
+            <input
+              #fileInput
+              type="file"
+              accept=".csv,.xls,.xlsx,.txt,.png,.jpg,.jpeg"
+              style="display:none"
+              (change)="onFileSelected($event)"
+            >
+          </div>
+          <ion-button
+            expand="block"
+            class="ion-margin-top"
+            (click)="convert()"
+            [disabled]="!selectedFile || loading"
+          >
+            @if (loading) {
+              <ion-spinner name="crescent" slot="start"></ion-spinner>
+              Convertendo...
+            } @else {
+              <ion-icon name="document-outline" slot="start"></ion-icon>
+              Converter para PDF
+            }
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      @if (errorMsg) {
+        <ion-card color="danger">
+          <ion-card-content>
+            <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+            {{ errorMsg }}
+          </ion-card-content>
+        </ion-card>
+      }
+
+      @if (result?.download_url) {
+        <ion-card color="success">
+          <ion-card-content class="success-content">
+            <ion-icon name="checkmark-circle-outline" class="success-icon"></ion-icon>
+            <p>Arquivo <strong>{{ result!.filename }}</strong> convertido com sucesso!</p>
+            <ion-button expand="block" fill="outline" [href]="result!.download_url" target="_blank">
+              <ion-icon name="download-outline" slot="start"></ion-icon>
+              Baixar PDF
+            </ion-button>
+            <ion-button expand="block" fill="clear" (click)="reset()">
+              Converter outro arquivo
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      }
+
+    </div>
+  </div>
+</ion-content>

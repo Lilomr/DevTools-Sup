@@ -1,0 +1,28 @@
+<ion-app>
+  <ion-menu contentId="main-content">
+    <ion-content>
+
+      <div class="menu-header">
+        <h1 class="menu-title">DevTools-Sup</h1>
+      </div>
+
+      <div class="menu-divider"></div>
+
+      <div class="menu-nav">
+      @for (p of visiblePages; track p.url) {
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+            routerLinkActive="selected" class="menu-item">
+            <div class="menu-icon-wrap" slot="start">
+              <ion-icon [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" [color]="p.color"></ion-icon>
+            </div>
+            <ion-label color="dark">{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        }
+      </div>
+
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>

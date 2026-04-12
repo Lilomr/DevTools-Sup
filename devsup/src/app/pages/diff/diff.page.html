@@ -1,0 +1,104 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Diff</ion-title>
+    @if (result) {
+      <ion-buttons slot="end">
+        <ion-button (click)="reset()">
+          <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="page-wrap diff-wrap">
+
+    @if (!result) {
+      <div class="diff-inputs">
+        <ion-card class="diff-card">
+          <ion-card-header>
+            <ion-card-title>Texto Original</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-textarea
+              [(ngModel)]="input1"
+              placeholder="Cole o texto original aqui..."
+              [rows]="12"
+              autoGrow="false"
+            ></ion-textarea>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="diff-card">
+          <ion-card-header>
+            <ion-card-title>Texto Modificado</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-textarea
+              [(ngModel)]="input2"
+              placeholder="Cole o texto modificado aqui..."
+              [rows]="12"
+              autoGrow="false"
+            ></ion-textarea>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <ion-button expand="block" class="diff-btn" (click)="compare()" [disabled]="loading">
+        @if (loading) {
+          <ion-spinner name="crescent" slot="start"></ion-spinner>
+        } @else {
+          <ion-icon name="git-compare-outline" slot="start"></ion-icon>
+        }
+        Comparar
+      </ion-button>
+    }
+
+    @if (errorMsg) {
+      <ion-card color="danger" class="page-box">
+        <ion-card-content>{{ errorMsg }}</ion-card-content>
+      </ion-card>
+    }
+
+    @if (result) {
+      <div class="diff-result">
+        <div class="diff-col">
+          <h4 class="diff-col-title">Original</h4>
+          <div class="diff-panel">
+            @for (line of result.left; track line.num) {
+              <div class="diff-line" [ngClass]="lineClass(line)">
+                <span class="diff-linenum">{{ line.num }}</span>
+                <span class="diff-text">{{ line.text }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="diff-col">
+          <h4 class="diff-col-title">Modificado</h4>
+          <div class="diff-panel">
+            @for (line of result.right; track line.num) {
+              <div class="diff-line" [ngClass]="lineClass(line)">
+                <span class="diff-linenum">{{ line.num }}</span>
+                <span class="diff-text">{{ line.text }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+
+  </div>
+</ion-content>
+
+@if (result) {
+  <ion-footer class="diff-footer">
+    <ion-button expand="block" class="diff-footer-btn" (click)="compareAgain()">
+      <ion-icon name="git-compare-outline" slot="start"></ion-icon>
+      Comparar novamente
+    </ion-button>
+  </ion-footer>
+}

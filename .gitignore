@@ -1,4 +1,18 @@
+# Python / UV
 __pycache__/
 *.pyc
 .ruff_cache/
 .venv/
+
+# Environment / Secrets
+.env
+.env.*
+secrets.json
+
+# Temporary files
+static/
+*.log
+
+# System files
+.DS_Store
+Thumbs.db

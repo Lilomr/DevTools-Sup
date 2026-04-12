@@ -1,0 +1,7 @@
+{
+  "name": "devsup",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,99 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Rajdhani:wght@500;700&display=swap');
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+@import "@ionic/angular/css/palettes/dark.always.css";
+
+ion-title {
+    text-align: center;
+    font-size: 22px;
+    color: #ffffff;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+    text-shadow:
+        0 0 12px rgba(255, 255, 255, 0.6),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+ion-title:hover {
+    font-size: 25px;
+    transition: all 0.3s ease-in-out;
+}
+
+ion-title:not(:hover) {
+    transition: all 0.3s ease-in-out;
+}
+
+.page-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12px 16px;
+  min-height: 100%;
+}
+
+.page-box {
+  width: 100%;
+  max-width: 520px;
+}
+
+// Cards modernos
+ion-card {
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+  margin: 0 0 12px !important;
+}
+
+ion-card-content {
+  padding: 12px !important;
+}
+
+// Labels com Rajdhani
+ion-label {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
+}
+
+// Inputs modernos
+ion-input, ion-textarea {
+  font-family: 'Rajdhani', sans-serif !important;
+  --padding-top: 8px !important;
+  --padding-bottom: 8px !important;
+}
+
+// Botões com verde e Rajdhani
+ion-button {
+  --border-radius: 10px;
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+// Badges
+ion-badge {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+}

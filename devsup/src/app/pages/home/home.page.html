@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DevTools-Sup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">DevTools-Sup</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="page-center">
+    <div class="cards-container">
+      @for (s of services; track s.url) {
+      <ion-card button (click)="navigate(s.url)" class="service-card">
+        <ion-card-content class="service-card-content">
+          <ion-icon [name]="s.icon" [color]="s.color" class="service-icon"></ion-icon>
+          <p class="service-title">{{ s.title }}</p>
+          <p class="service-desc">{{ s.description }}</p>
+        </ion-card-content>
+      </ion-card>
+      }
+    </div>
+  </div>
+</ion-content>
