@@ -28,7 +28,7 @@
             <ion-input [(ngModel)]="ports" placeholder="80,443,8080" type="text" autocomplete="off"
               clearInput></ion-input>
           </ion-item>
-          <ion-button expand="block" class="ion-margin-top" (click)="check()" [disabled]="loading">
+          <ion-button expand="block" fill="outline" class="ion-margin-top" (click)="check()" [disabled]="loading">
             @if (loading) { <ion-spinner name="crescent" slot="start"></ion-spinner> }
             @else { <ion-icon name="server-outline" slot="start"></ion-icon> }
             Verificar
@@ -94,7 +94,7 @@
             <ion-input [(ngModel)]="hostname" placeholder="exemplo.com" type="text" autocomplete="off"
               (keyup.enter)="lookup()" clearInput></ion-input>
           </ion-item>
-          <ion-button expand="block" class="ion-margin-top" (click)="lookup()" [disabled]="dnsLoading">
+          <ion-button expand="block" fill="outline" class="ion-margin-top" (click)="lookup()" [disabled]="dnsLoading">
             @if (dnsLoading) { <ion-spinner name="crescent" slot="start"></ion-spinner> }
             @else { <ion-icon name="globe-outline" slot="start"></ion-icon> }
             Consultar
