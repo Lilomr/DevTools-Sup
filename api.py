@@ -66,14 +66,16 @@ def combo_api():
         except Exception:
             dns_routes = []
 
-        return jsonify({
-            "ip": ip,
-            "port_list": port_list,
-            "status_list": status_list,
-            "color_list": color_list,
-            "resolved_ip": resolved_ip,
-            "dns_routes": dns_routes,
-        })
+        return jsonify(
+            {
+                "ip": ip,
+                "port_list": port_list,
+                "status_list": status_list,
+                "color_list": color_list,
+                "resolved_ip": resolved_ip,
+                "dns_routes": dns_routes,
+            }
+        )
     except socket.gaierror:
         return jsonify({"error": f"Servidor '{ip}' inválido ou não encontrado"}), 400
     except UnicodeError:
@@ -101,7 +103,9 @@ def diff_api():
         for i in range(max(len(removed_buf), len(added_buf))):
             if i < len(removed_buf):
                 left_num += 1
-                left.append({"num": left_num, "text": removed_buf[i], "kind": "removed"})
+                left.append(
+                    {"num": left_num, "text": removed_buf[i], "kind": "removed"}
+                )
             else:
                 left.append({"num": "", "text": "", "kind": "empty"})
 

@@ -20,11 +20,13 @@
         <ion-card-content>
           <ion-item lines="full">
             <ion-label position="stacked">Servidor / IP</ion-label>
-            <ion-input [(ngModel)]="ip" placeholder="192.168.1.1 ou exemplo.com" type="text" autocomplete="off" clearInput></ion-input>
+            <ion-input [(ngModel)]="ip" placeholder="192.168.1.1 ou exemplo.com" type="text" autocomplete="off"
+              clearInput></ion-input>
           </ion-item>
           <ion-item lines="full" class="ion-margin-top">
             <ion-label position="stacked">Portas (separadas por vírgula)</ion-label>
-            <ion-input [(ngModel)]="ports" placeholder="80,443,8080" type="text" autocomplete="off" clearInput></ion-input>
+            <ion-input [(ngModel)]="ports" placeholder="80,443,8080" type="text" autocomplete="off"
+              clearInput></ion-input>
           </ion-item>
           <ion-button expand="block" class="ion-margin-top" (click)="check()" [disabled]="loading">
             @if (loading) { <ion-spinner name="crescent" slot="start"></ion-spinner> }
@@ -35,43 +37,47 @@
       </ion-card>
 
       @if (errorMsg) {
-        <ion-card color="danger"><ion-card-content>{{ errorMsg }}</ion-card-content></ion-card>
+      <ion-card color="danger"><ion-card-content>{{ errorMsg }}</ion-card-content></ion-card>
       }
 
       @if (result) {
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>{{ result.ip }}</ion-card-subtitle>
-            <ion-card-title>Resultado das Portas</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-list lines="full">
-              @for (port of result.port_list; track $index) {
-                <ion-item>
-                  <ion-icon [name]="statusIcon(result.color_list[$index])" [color]="statusColor(result.color_list[$index])" slot="start"></ion-icon>
-                  <ion-label><strong>Porta {{ port }}</strong><p>{{ result.status_list[$index] }}</p></ion-label>
-                  <ion-badge slot="end" [color]="statusColor(result.color_list[$index])">{{ result.status_list[$index] }}</ion-badge>
-                </ion-item>
-              }
-            </ion-list>
-          </ion-card-content>
-        </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>{{ result.ip }}</ion-card-subtitle>
+          <ion-card-title>Resultado das Portas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list lines="full">
+            @for (port of result.port_list; track $index) {
+            <ion-item>
+              <ion-icon [name]="statusIcon(result.color_list[$index])" [color]="statusColor(result.color_list[$index])"
+                slot="start"></ion-icon>
+              <ion-label><strong>Porta {{ port }}</strong>
+                <p>{{ result.status_list[$index] }}</p>
+              </ion-label>
+              <ion-badge slot="end" [color]="statusColor(result.color_list[$index])">{{ result.status_list[$index]
+                }}</ion-badge>
+            </ion-item>
+            }
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
 
-        @if (result.dns_routes && result.dns_routes.length > 0) {
-          <ion-card>
-            <ion-card-header><ion-card-title>Rotas DNS</ion-card-title></ion-card-header>
-            <ion-card-content>
-              <ion-list lines="full">
-                @for (rota of result.dns_routes; track $index) {
-                  <ion-item>
-                    <ion-icon name="arrow-forward-outline" slot="start" color="primary"></ion-icon>
-                    <ion-label class="rota-text">{{ $index + 1 }}. {{ rota }}</ion-label>
-                  </ion-item>
-                }
-              </ion-list>
-            </ion-card-content>
-          </ion-card>
-        }
+      @if (result.dns_routes && result.dns_routes.length > 0) {
+      <ion-card>
+        <ion-card-header><ion-card-title>Rotas DNS</ion-card-title></ion-card-header>
+        <ion-card-content>
+          <ion-list lines="full">
+            @for (rota of result.dns_routes; track $index) {
+            <ion-item>
+              <ion-icon name="arrow-forward-outline" slot="start" color="primary"></ion-icon>
+              <ion-label class="rota-text">{{ rota }}</ion-label>
+            </ion-item>
+            }
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+      }
       }
 
       <div class="section-divider"></div>
@@ -85,7 +91,8 @@
         <ion-card-content>
           <ion-item lines="full">
             <ion-label position="stacked">Domínio</ion-label>
-            <ion-input [(ngModel)]="hostname" placeholder="exemplo.com" type="text" autocomplete="off" (keyup.enter)="lookup()" clearInput></ion-input>
+            <ion-input [(ngModel)]="hostname" placeholder="exemplo.com" type="text" autocomplete="off"
+              (keyup.enter)="lookup()" clearInput></ion-input>
           </ion-item>
           <ion-button expand="block" class="ion-margin-top" (click)="lookup()" [disabled]="dnsLoading">
             @if (dnsLoading) { <ion-spinner name="crescent" slot="start"></ion-spinner> }
@@ -96,25 +103,25 @@
       </ion-card>
 
       @if (dnsErrorMsg) {
-        <ion-card color="danger"><ion-card-content>{{ dnsErrorMsg }}</ion-card-content></ion-card>
+      <ion-card color="danger"><ion-card-content>{{ dnsErrorMsg }}</ion-card-content></ion-card>
       }
 
       @if (dnsResult && !dnsErrorMsg) {
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Resultado para <strong>{{ dnsResult.dns }}</strong></ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-list lines="full">
-              @for (linha of dnsResult.status; track $index) {
-                <ion-item>
-                  <ion-icon name="arrow-forward-outline" slot="start" color="primary"></ion-icon>
-                  <ion-label class="dns-record">{{ linha }}</ion-label>
-                </ion-item>
-              }
-            </ion-list>
-          </ion-card-content>
-        </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Resultado para <strong>{{ dnsResult.dns }}</strong></ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list lines="full">
+            @for (linha of dnsResult.status; track $index) {
+            <ion-item>
+              <ion-icon name="arrow-forward-outline" slot="start" color="primary"></ion-icon>
+              <ion-label class="dns-record">{{ linha }}</ion-label>
+            </ion-item>
+            }
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
       }
 
     </div>

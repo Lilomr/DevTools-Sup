@@ -8,7 +8,9 @@ from reportlab.platypus import PageBreak, Paragraph, SimpleDocTemplate, Table
 from reportlab.platypus import Image as ReportLabImage
 
 
-def csv_para_pdf(arquivo, linhas_por_pagina: int = 40, titulo_pdf: str = "") -> io.BytesIO:
+def csv_para_pdf(
+    arquivo, linhas_por_pagina: int = 40, titulo_pdf: str = ""
+) -> io.BytesIO:
     buffer = io.BytesIO()
     df = pd.read_csv(arquivo)
     doc = SimpleDocTemplate(buffer, pagesize=letter, title=titulo_pdf)
@@ -17,7 +19,7 @@ def csv_para_pdf(arquivo, linhas_por_pagina: int = 40, titulo_pdf: str = "") -> 
     story = []
     total_linhas = len(dados)
     for i in range(0, total_linhas, linhas_por_pagina):
-        story.append(Table([colunas] + dados[i:i + linhas_por_pagina], repeatRows=1))
+        story.append(Table([colunas] + dados[i : i + linhas_por_pagina], repeatRows=1))
         if i + linhas_por_pagina < total_linhas:
             story.append(PageBreak())
     doc.build(story)
@@ -36,7 +38,11 @@ def excel_para_pdf(arquivo, titulo_pdf: str = "") -> io.BytesIO:
 
 def texto_para_pdf(arquivo, titulo_pdf: str = "") -> io.BytesIO:
     buffer = io.BytesIO()
-    texto = arquivo.read().decode("utf-8") if hasattr(arquivo, "read") else open(arquivo, encoding="utf-8").read()
+    texto = (
+        arquivo.read().decode("utf-8")
+        if hasattr(arquivo, "read")
+        else open(arquivo, encoding="utf-8").read()
+    )
     doc = SimpleDocTemplate(buffer, pagesize=letter, title=titulo_pdf)
     styles = getSampleStyleSheet()
     doc.build([Paragraph(texto.replace("\n", "<br/>"), styles["Normal"])])

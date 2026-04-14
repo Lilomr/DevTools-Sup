@@ -6,10 +6,9 @@
         <h1 class="menu-title">DevTools-Sup</h1>
       </div>
 
-      <div class="menu-divider"></div>
-
       <div class="menu-nav">
-      @for (p of visiblePages; track p.url) {
+        @for (p of visiblePages; track p.url) {
+        <div class="menu-divider"></div>
         <ion-menu-toggle auto-hide="false">
           <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
             routerLinkActive="selected" class="menu-item">
